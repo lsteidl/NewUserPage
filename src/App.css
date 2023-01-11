@@ -27,6 +27,57 @@
 .App-link {
   color: #61dafb;
 }
+.GeeksForGeeks {
+  background-image: 
+  url(
+  "https://media.geeksforgeeks.org/wp-content/uploads/rk.png");
+  background-size: "cover";
+  height: 100vh;
+  margin-top: -70px;
+  font-size:50px;
+  background-repeat:no-repeat;
+}
+.blur-card{
+  backdrop-filter: blur(10px);
+}
+.transparent-input {
+  /* background-color: rgba(0, 0, 0, 0); */
+  /* border: 1px solid white; */
+  /*outline: transparent !important; */
+  background-color: transparent!important;
+  border-color: white!important;
+  outline: transparent!important;
+}
+.background-custom {
+  -webkit-background-size: cover;
+  -moz-background-size: cover;
+  background-size: cover;
+  -o-background-size: cover;
+}
+button.myBtn:hover {
+  background-color:rgba(255, 255, 255, 0.25);
+  transition: 0.7s;
+}
+button.myBtn:focus {
+  background-color:rgba(255, 255, 255, 0.35);
+  transition: 0.7s;
+}
+button.myBtn:active, button.btn:target, button.btn:active:focus  {
+  background-color:rgba(255, 255, 255, 0.5);
+  transition: 0.3s;
+}
+button.my-link:hover {
+  background-color:rgba(255, 255, 255, 0);
+  transition: 0.7s;
+}
+button.my-link:focus {
+  background-color:rgba(255, 255, 255, 0);
+  transition: 0.7s;
+}
+button.my-link:active, button.my-link:target, button.my-link:active:focus  {
+  background-color:rgba(255, 255, 255, 0);
+  transition: 0.3s;
+}
 
 @keyframes App-logo-spin {
   from {
