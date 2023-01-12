@@ -5,9 +5,6 @@ import React from 'react';
 * Provides instructions to complete account setup.
 */
 class Welcome extends React.Component {
-    constructor(props) {
-        super(props);
-    }
     render(){
         return(
             <div className="container pt-5" >
@@ -15,7 +12,7 @@ class Welcome extends React.Component {
                     <h5 className="card-header">Account Created</h5>
                     <div className="card-body">
                         <h2 className="p-2" align="center">Welcome, {this.props.name}!</h2>
-                        <p> A confirmation email has been sent to <a class="link-light">{this.props.email}.</a></p>
+                        <p> A confirmation email has been sent to <u>{this.props.email}.</u></p>
                         <p> Please click the validation link in the email to verify your account.</p>
                     </div>
                 </div>

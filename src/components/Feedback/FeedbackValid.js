@@ -7,9 +7,6 @@ import React from 'react';
 * 
 */
 class FeedbackValid extends React.Component {
-  constructor(props) {
-    super(props);
-  }
   render(){
     if(this.props.valid === "passwordMatch"){
       return(

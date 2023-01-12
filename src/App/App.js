@@ -1,12 +1,9 @@
 import './App.css';
 import React from 'react';
-import SignUp from './components/SignUp/SignUp';
-import Login from './components/Login/Login';
-import HomePage from './components/HomePage/HomePage';
-import FormError from './components/Errors/FormError';
-import Background1 from './images/abstract.jpg';
-import Background2 from './images/wood.png';
-import Background3 from './images/space.jpg';
+import SignUp from '../components/SignUp/SignUp.js';
+import Login from '../components/Login/Login.js';
+import HomePage from '../components/HomePage/HomePage';
+import FormError from '../components/Errors/FormError';
 
 /*
 * This is the main component returned by App.js
@@ -18,9 +15,7 @@ class EntryPage extends React.Component {
     super(props);
     this.state = {
       currentView: "signUp",
-      name: "",
       email: "",
-      background: `url(${Background1})`,
     }
   }
   /*
@@ -30,14 +25,16 @@ class EntryPage extends React.Component {
   async loadFormData(){
     await getFormData(this); // retrive states and occupations
     loadStates(); // adds option elements in CustomForm
-    loadOccupations(); // adds option elements in CustomForm
+    loadOccupations(this); // adds option elements in CustomForm
   }
   async componentDidMount(){
+    console.log("component mounted!!!");
     this.loadFormData();
-    // new Image().src = `url(${Background1})`;
-    // new Image().src = `url(${Background2})`;
-    // new Image().src = `url(${Background3})`;
-    
+  }
+  revealSignUp(){
+    let login = document.getElementById("sign-up");
+    login.classList.remove("invisible");
+    login.classList.add("visible")
   }
   async componentDidRender(){
     this.loadFormData();
@@ -52,23 +49,33 @@ class EntryPage extends React.Component {
   * Background resets to default after logging out.
   */
   changeBackground = (image) => {
-    console.log("change background called in App.js");
+    let main = document.getElementById("main");
     if (image === "abstract"){
-      this.setState({
-        background: `url(${Background1})`,
-      })
+      if(main.classList.contains("bg-space"))
+        main.classList.remove("bg-space");
+      else
+        main.classList.remove("bg-wood");
+
+      document.getElementById("main").classList.add("bg-abstract");
     }
     else if(image === "wood"){
-      this.setState({
-        background: `url(${Background2})`,
-      })
+      if(main.classList.contains("bg-abstract"))
+        main.classList.remove("bg-abstract");
+      else
+        main.classList.remove("bg-space");
+
+      document.getElementById("main").classList.add("bg-wood");
     }
     else {
-      this.setState({
-        background: `url(${Background3})`,
-      })
+      if(main.classList.contains("bg-wood"))
+        main.classList.remove("bg-wood");
+      else 
+        main.classList.remove("bg-abstract");
+
+      document.getElementById("main").classList.add("bg-space");
     }
   }
+
   /*
   * Switch Tab title to match current context
   */
@@ -86,17 +93,12 @@ class EntryPage extends React.Component {
     switch(this.state.currentView) {
       case "signUp":
         this.updateTitle("Create Account");
-        this.loadFormData(); 
+        this.loadFormData(); // reload Occupation and State options
         return (
           <SignUp 
             parentCallback = {(value)=>this.changeView(value)}
           />
         )
-      case "error":
-        this.updateTitle("Error");
-         return (
-               <FormError errorType="loading"></FormError>
-         )
       case "login":
         this.updateTitle("Login");
         return (
@@ -112,13 +114,22 @@ class EntryPage extends React.Component {
                 parentBackground = {(value)=>this.changeBackground(value)}
               />
           )
+        case "error":
+          this.updateTitle("Error");
+          return (
+                <FormError errorType="loading"></FormError>
+          )
+        default:
+          this.updateTitle("Error");
+          return (
+                <FormError errorType="default"></FormError>
+          )
     }
   }
+  // // style={{backgroundImage: this.state.background,  minWidth: '100vw', minHeight:'100vh', backgroundSize:'cover', backgroundAttachment: 'fixed'}}>
   render(){
-    //console.log("RENDER CALLED IN APPP.JS");
     return(
-      <section id="main" className="bg-image d-flex justify-content-center align-items-center background-custom"
-                style={{backgroundImage: this.state.background,  minWidth: '100vw', minHeight:'100vh', backgroundSize:'cover', backgroundAttachment: 'fixed'}}>
+      <section id="main" className="min-vh-100 bg-image d-flex align-items-center page-background bg-abstract">
         {this.currentView()}
       </section>
     )
@@ -162,9 +173,9 @@ const getFormData = async (obj) => {
 */
 function loadStates(){
   let select = document.getElementById("validationState");
-  for(var i = 0; i < states.length; i++) {
-    var opt = states[i];
-    var el = document.createElement("option");
+  for(let i = 0; i < states.length; i++) {
+    let opt = states[i] + " (" + abbrev[i] + ")";
+    let el = document.createElement("option");
     el.text = opt;
     el.value = opt;
     if(select != null)
@@ -175,22 +186,23 @@ function loadStates(){
 * Populates options for Occupations in CustomForm
 * Depends on data gathered by getFormData().
 */
-function loadOccupations(){
+function loadOccupations(obj){
   let select = document.getElementById("validationOccu");
-  for(var i = 0; i < occupations.length; i++) {
-    var opt = occupations[i];
-    var el = document.createElement("option");
+  for(let i = 0; i < occupations.length; i++) {
+    let opt = occupations[i];
+    let el = document.createElement("option");
     el.text = opt;
     el.value = opt;
     if(select != null)
       select.add(el);
   }
+  obj.revealSignUp(); // make sign up visible after loading options 
 }
 
 function App() {
   
   return (
-      <EntryPage style={{ height:'100vh', width:'100vw'}}> </EntryPage>
+      <EntryPage className='page-full'> </EntryPage>
   );
 }
 export default App;

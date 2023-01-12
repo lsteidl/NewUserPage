@@ -61,33 +61,33 @@ function CustomForm(props) {
         postFormInfo(data);
       }
 
-    const { register, handleSubmit, formState: { errors } } = useForm();
+    const { register, handleSubmit } = useForm();
         return(
              <form id="signUpForm" className="needs-validation" align="center" noValidate onSubmit={handleSubmit(onSubmit)}>
                       <div className="has-validation text-start position-relative">
                         <label className="pt-1 form-label" id="inputName">Full Name</label>
-                        <input type="text" className="form-control transparent-input text-white" maxlength="50" id="validationName"
+                        <input type="text" className="form-control transparent-input text-white" maxLength="50" id="validationName"
                         required {...register("name")} pattern="^.*$"></input>
                         <FeedbackInvalid/>
                         <FeedbackValid/>
                       </div>
                       <div className="has-validation text-start position-relative">
                         <label className="pt-3 form-label" id="inputEmail">Email</label>
-                        <input type="email" className="form-control transparent-input text-white" maxlength="50" id="validationEmail" 
+                        <input type="email" className="form-control transparent-input text-white" maxLength="50" id="validationEmail" 
                         aria-describedby="inputGroupPrepend" required {...register("email")} pattern="^[A-Za-z0-9](([a-zA-Z0-9,=\.!\-#|\$%\^&\*\+/\?_`\{\}~]+)*)@(?:[0-9a-zA-Z-]+\.)+[a-zA-Z]{2,9}$"></input>
                         <FeedbackInvalid />
                         <FeedbackValid/>
                       </div>
                         <div className="has-validation text-start position-relative">
-                          <label className="pt-3 form-label" id="inputPass1" >Password</label>
-                          <input type="password" className="form-control transparent-input text-white" minlength="8" maxlength="40" id="validationPassword1"
+                          <label className="pt-3 form-label" id="inputPass1">Password</label>
+                          <input type="password" className="form-control transparent-input text-white" minLength="8" maxLength="40" id="validationPassword1"
                           required onChange={ () => document.getElementById("validationPassword2").pattern = document.getElementById("validationPassword1").value} ></input>
                           <FeedbackInvalid error="length"/>
                           <FeedbackValid/>
                         </div>
                         <div className="has-validation text-start position-relative">
-                          <label className="pt-3 form-label" id="inputPass2" >Repeat Password</label>
-                          <input type="password" className="form-control transparent-input text-white" maxlength="40" id="validationPassword2"
+                          <label className="pt-3 form-label" id="inputPass2">Repeat Password</label>
+                          <input type="password" className="form-control transparent-input text-white" maxLength="40" id="validationPassword2"
                           required {...register("password")}></input>
                           {/* <div className="valid-tooltip position-absolute top-100 end-0 text-nowrap">
                             Looks good!

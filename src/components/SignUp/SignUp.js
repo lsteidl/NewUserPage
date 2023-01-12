@@ -7,6 +7,7 @@ import FormError from '../../components/Errors/FormError.js';
 * Allows user to create an account, 
 * most of the work is done in CustomForm.js.
 * Stores name and email to be used in a personalized "Welcome" message.
+* This component is invisible until all form data has been loaded. 
 */
 class SignUp extends React.Component {
    constructor(props) {
@@ -56,8 +57,7 @@ currentView = () => {
   switch(this.state.currentView) {
     case "form":
       return (
-        <div className="container">
-        <h2 className="text-white" align="center"></h2>
+        <div id="sign-up" className="container invisible">
           <div className="card mx-auto shadow bg-transparent text-white col-sm-12 col-md-8 col-lg-5 blur-card" >
             <h5 className="card-header text-white">Create Account
             <button id="submit1" type="button" className="btn btn-primary btn-sm" onClick={() => this.changeView("welcome")}>Success</button>
@@ -86,6 +86,10 @@ currentView = () => {
         return (
           <FormError />
         )
+      default:
+          return (
+            <FormError errorType="default"/>
+          )
   }
 }
 

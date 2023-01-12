@@ -7,9 +7,6 @@ import React from 'react';
 * 
 */
 class FeedbackInvalid extends React.Component {
-    constructor(props) {
-        super(props);
-    }
     render(){  
         // Login Page feedback
         if(this.props.error === "email"){
