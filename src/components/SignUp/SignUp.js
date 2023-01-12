@@ -7,7 +7,8 @@ import FormError from '../../components/Errors/FormError.js';
 * Allows user to create an account, 
 * most of the work is done in CustomForm.js.
 * Stores name and email to be used in a personalized "Welcome" message.
-* This component is invisible until all form data has been loaded. 
+* Parts of this component are invisible until all form data has been loaded.
+* Spinning "loading" icon displays while this data loads.
 */
 class SignUp extends React.Component {
    constructor(props) {
@@ -57,15 +58,21 @@ currentView = () => {
   switch(this.state.currentView) {
     case "form":
       return (
-        <div id="sign-up" className="container invisible">
-          <div className="card mx-auto shadow bg-transparent text-white col-sm-12 col-md-8 col-lg-5 blur-card" >
+        
+        <div  className="container">
+          <div className="card mx-auto shadow bg-transparent text-white col-sm-12 col-md-8 col-lg-5 blur-card position-relative" >
             <h5 className="card-header text-white">Create Account
             <button id="submit1" type="button" className="btn btn-primary btn-sm" onClick={() => this.changeView("welcome")}>Success</button>
             <button id="submit1" type="button" className="btn btn-primary btn-sm" onClick={() => this.changeView("error")}> Fail</button>
             <button id="submit1" type="button" className="btn btn-primary btn-sm" onClick={() => this.props.parentCallback("home")}> Home</button>
 
             </h5>
-                <div className="card-body">
+            <div id="formLoading" className="position-absolute start-50 top-50 translate-middle">
+              <div className="spinner-border" role="status">
+                <span className="visually-hidden">Loading...</span>
+            </div>
+            </div>
+                <div id="sign-up" className="invisible card-body">
                   <CustomForm setView={(value) => this.changeView(value)}
                               setEmail={(value) => this.changeEmail(value)}
                               setName={(value) => this.changeName(value)}

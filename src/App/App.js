@@ -33,8 +33,9 @@ class EntryPage extends React.Component {
   }
   revealSignUp(){
     let login = document.getElementById("sign-up");
+    let loading = document.getElementById("formLoading");
     login.classList.remove("invisible");
-    login.classList.add("visible")
+    loading.classList.add("invisible");
   }
   async componentDidRender(){
     this.loadFormData();
