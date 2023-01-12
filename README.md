@@ -1,6 +1,7 @@
 # Entry Page for Application
 
 This project uses React and Bootstrap 5.2
+
 Users can Create an Account, Log in, or view the HomePage as a guest.
 
 ## Available Scripts
