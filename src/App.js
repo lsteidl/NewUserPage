@@ -1,12 +1,13 @@
 import './App.css';
 import React from 'react';
-import SignUp from './SignUp.js';
-import FormError from './FormError.js';
-import Background1 from './abstract.jpg';
-import Background2 from './wood.png';
-import Background3 from './space.jpg';
-import Login from './Login';
-import HomePage from './HomePage';
+import SignUp from './components/SignUp/SignUp';
+import Login from './components/Login/Login';
+import HomePage from './components/HomePage/HomePage';
+import FormError from './components/Errors/FormError';
+import Background1 from './images/abstract.jpg';
+import Background2 from './images/wood.png';
+import Background3 from './images/space.jpg';
+
 /*
 * This is the main component returned by App.js
 * Facilitates the switching between Login, SignUp,
