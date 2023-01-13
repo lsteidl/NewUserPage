@@ -4,9 +4,29 @@ This project uses React and Bootstrap 5.2
 
 Users can Create an Account, Log in, or view the HomePage as a guest.
 
-## Available Scripts
+CustomForm.js only allows form submission when all fields are valid.
+
+Definitions of valid entries:
+
+* Name: Any String with length > 0
+
+* Email: [Any String with length > 0][@][Any String with length > 0][.][Any String of letters with length > 1].
+
+* Password: Any String with length > 7, password fields must match.
+
+* State: Any of the select options.
+
+* Occupation: Any of the select options.
+
+Any valid email and passsword entered into the Login page will bring the user to the HomePage.
+
+## How to run this project using Yarn
 
 In the project directory, you can run:
+
+### `yarn install`
+
+Next, in the project directory, you can run:
 
 ### `yarn start`
 
@@ -15,11 +35,6 @@ Open [http://localhost:3000](http://localhost:3000) to view it in your browser.
 
 The page will reload when you make changes.\
 You may also see any lint errors in the console.
-
-### `yarn test`
-
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
 
 ### `yarn build`
 
@@ -30,3 +45,15 @@ The build is minified and the filenames include the hashes.\
 Your app is ready to be deployed!
 
 See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+
+## How to run this project using NPM
+
+In the project directory, you can run:
+
+### `npm ci`
+
+Next, in the project directory, you can run:
+
+### `npm start`
+
+
