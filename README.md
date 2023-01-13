@@ -20,6 +20,11 @@ Definitions of valid entries:
 
 Any valid email and passsword entered into the Login page will bring the user to the HomePage.
 
+### Application Overview:
+EntryPage returns 1 of 4 components: SignUp, Login, HomePage or FormError.
+
+SignUp returns 1 of 3 components: CustomForm, Success, or FormError.
+
 ## How to run this project using Yarn
 
 In the project directory, you can run:
