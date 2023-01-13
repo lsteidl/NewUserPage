@@ -14,6 +14,11 @@ class Welcome extends React.Component {
                         <h2 className="p-2" align="center">Welcome, {this.props.name}!</h2>
                         <p> A confirmation email has been sent to <u>{this.props.email}.</u></p>
                         <p> Please click the validation link in the email to verify your account.</p>
+                        <div className="text-center">
+                            <button type="button" className=" mx-auto btn btn-link my-link text-white text-center text-nowrap" 
+                                onClick={() => this.props.grandParentCallback("home")}>Continue as a Guest.</button>
+                        </div>
+
                     </div>
                 </div>
                 

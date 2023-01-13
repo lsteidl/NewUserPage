@@ -42,22 +42,30 @@ function CustomForm(props) {
           else {
             props.setView("error")
           }
-          return response})
+          return response; })
         .then(response => response.json())
         .then(data => console.log(JSON.stringify(data)))
-        .catch(err => { console.log('Request Failed', err)
-                        props.setView("error")
+        .catch(err => { 
+          console.log('Request Failed', err)
+          props.setView("error")
         });
         
       }
-      // Modifies submit button to indicate form is being processed
+      /*
+      * Handles form submission
+      * Modifies submit button to indicate form is being processed
+      */
       function onSubmit(data){
+        // prepare loading symbol
         let element = document.getElementById("submitButton");
         element.innerText = "Loading...";
         const span = document.createElement("span");
         span.role = "status";
         span.className="spinner-border spinner-border-sm";
         element.appendChild(span);
+        // prepare data
+        data.state = data.state.split(" ")[0]; // eliminate abbreviation from state string, only pass name of the State
+        console.log(data);
         postFormInfo(data);
       }
 
@@ -89,24 +97,21 @@ function CustomForm(props) {
                           <label className="pt-3 form-label" id="inputPass2">Repeat Password</label>
                           <input type="password" className="form-control transparent-input text-white" maxLength="40" id="validationPassword2"
                           required {...register("password")}></input>
-                          {/* <div className="valid-tooltip position-absolute top-100 end-0 text-nowrap">
-                            Looks good!
-                          </div> */}
                           <FeedbackInvalid error="passwordMatch"/>
                           <FeedbackValid valid="passwordMatch"/>
                         </div>
                         <div className="has-validation text-start position-relative">
                           <label className="pt-3 form-label" id="inputState">State</label>
-                          <select className="form-control form-select transparent-input text-white" id="validationState" required {...register("state")}>
-                            <option selected disabled value="">Choose...</option>
+                          <select defaultValue="" className="form-control form-select transparent-input text-white" id="validationState" required {...register("state")}>
+                            <option disabled value="">Choose...</option>
                           </select>
                           <FeedbackInvalid/>
                           <FeedbackValid/>
                         </div>
                       <div className="has-validation text-start position-relative">
                         <label className="pt-3 form-label" id="inputOccu">Occupation</label>
-                        <select className="form-control form-select transparent-input text-white" aria-label="select example" id="validationOccu" required {...register("occupation")}>
-                          <option selected disabled value="">Choose...</option>
+                        <select defaultValue="" className="form-control form-select transparent-input text-white" aria-label="select example" id="validationOccu" required {...register("occupation")}>
+                          <option disabled value="">Choose...</option>
                         </select>
                         <FeedbackInvalid/>
                         <FeedbackValid/>

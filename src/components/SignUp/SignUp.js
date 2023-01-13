@@ -87,6 +87,7 @@ currentView = () => {
         <Welcome 
         email={this.state.email}
         name={this.state.name}
+        grandParentCallback={(value) => this.props.parentCallback(value)}
         />
       )
       case "error":
