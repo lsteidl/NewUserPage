@@ -9,8 +9,8 @@ import { useForm } from "react-hook-form";
 * Validation is not active until "Submit" button is pressed.
 * All fields are required. 
 * Definitions of valid entries:
-* Email: [Any String with length > 0][@][Any String with length > 0][.][Any String of letters with length > 1].
-* Password: Any String with length > 0.
+* Email: [Any String with length > 0][@][Any String with length > 0][.][Any String of letters with length > 1]. Length must be < 51.
+* Password: Any String with length > 1.
 */ 
 function LoginForm(props) {
     /*
@@ -44,7 +44,7 @@ function LoginForm(props) {
                 </div>
                 <div className="has-validation text-start position-relative">
                     <label className="pt-3 form-label" id="inputPass1">Password</label>
-                    <input type="password" minLength="8" maxLength="40" className="form-control transparent-input text-white" id="loginPW" 
+                    <input type="password" minLength="1" maxLength="40" className="form-control transparent-input text-white" id="loginPW" 
                     required></input>
                     <FeedbackInvalid error="password"/>
                     <FeedbackValid/>

@@ -12,7 +12,6 @@ class Login extends React.Component {
  */
  componentDidMount(){
   const form = document.getElementById("loginForm");
-  console.log("validator is running\n");
     form.addEventListener('submit', event => {
       if (!form.checkValidity()) {
         event.preventDefault()

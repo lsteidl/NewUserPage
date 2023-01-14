@@ -52,6 +52,53 @@ function CustomForm(props) {
         
       }
       /*
+      * check name validity
+      */
+      function checkName(name){
+        if(name.length > 50 || name.length === 0){
+          return false;
+        }
+        else{
+          return true;
+        }
+      }
+      /*
+      * check email validity
+      * future use: verify email is not yet taken
+      */
+      function checkEmail(email){
+        if(email.length > 50) 
+          return false;
+        if(/^[A-Za-z0-9](([a-zA-Z0-9,=.!\-#|$%^&*+/?_`{}~]+)*)@(?:[0-9a-zA-Z-]+.)+[a-zA-Z]{2,9}$/.test(email)){
+          return true;
+        }
+        else{
+          return false;
+        }
+      }
+      /*
+      * return true if password is valid
+      */
+      function checkPassword(password){
+        if(password.length > 7 && password.length < 41){
+          return true;
+        }
+        else{
+          return false;
+        }
+      }
+      /*
+      * return true if form data is valid
+      */
+      function checkFormData(data){
+        if(checkName(data.name) && checkEmail(data.email) && checkPassword(data.password)){
+          return true;
+        }
+        else{
+          return false;
+        }
+      }
+      /*
       * Handles form submission
       * Modifies submit button to indicate form is being processed
       */
@@ -66,7 +113,12 @@ function CustomForm(props) {
         // prepare data
         data.state = data.state.split(" ")[0]; // eliminate abbreviation from state string, only pass name of the State
         console.log(data);
-        postFormInfo(data);
+        if(checkFormData(data)){ // final data check
+          postFormInfo(data);
+        }
+        else{
+          props.setView("error");
+        }
       }
 
     const { register, handleSubmit} = useForm();

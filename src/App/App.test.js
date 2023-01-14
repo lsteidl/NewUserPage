@@ -1,11 +1,7 @@
 import React from 'react';
-import EntryPage from '../components/EntryPage/EntryPage';
-import Welcome from '../components/SignUp/Welcome';
-import ReactDOM from 'react-dom';
 import App from './App';
-import CustomForm from '../components/SignUp/CustomForm';
-import { render, screen, fireEvent, cleanup} from '@testing-library/react';
 import SignUp from '../components/SignUp/SignUp';
+import { render, screen, fireEvent, cleanup} from '@testing-library/react';
 import '@testing-library/jest-dom'
 
 // Test that rendering the App component loads Create account card in Login.js

@@ -175,11 +175,8 @@ const getFormData = async (obj) => {
 * Depends on data gathered by getFormData().
 */
 function loadStates(){
-  // let option = document.getElementById("option1");
-  // if(option === null){
     let select = document.getElementById("validationState");
     for(let i = 0; i < states.length; i++){
-      console.log("adding state" + i);
       let opt = states[i] + " (" + abbrev[i] + ")";
       let el = document.createElement("option");
       el.id = "stateOption"+i;
