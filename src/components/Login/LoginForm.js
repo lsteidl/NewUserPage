@@ -44,7 +44,7 @@ function LoginForm(props) {
                 </div>
                 <div className="has-validation text-start position-relative">
                     <label className="pt-3 form-label" id="inputPass1">Password</label>
-                    <input type="password" maxLength="40" className="form-control transparent-input text-white" id="loginPW" 
+                    <input type="password" minLength="8" maxLength="40" className="form-control transparent-input text-white" id="loginPW" 
                     required></input>
                     <FeedbackInvalid error="password"/>
                     <FeedbackValid/>
