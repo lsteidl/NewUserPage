@@ -32,8 +32,8 @@ class EntryPage extends React.Component {
   * Waits to display form text until data is loaded
   */
   revealSignUp(){
-    let signUp = document.getElementById("signUp");
-    let signUpHeader = document.getElementById("signUpHeader");
+    let signUp = document.getElementById("signUp"); // SignUp card in SignUp.js
+    let signUpHeader = document.getElementById("signUpHeader"); // header in SignUp.js
     let loading = document.getElementById("formLoading"); // "loading" spinning icon
     signUp.classList.remove("invisible");
     signUpHeader.classList.remove("invisible");
