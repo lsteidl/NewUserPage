@@ -96,7 +96,7 @@ function CustomForm(props) {
                         </div>
                         <div className="has-validation text-start position-relative">
                           <label className="pt-3 form-label" id="inputPass2">Repeat Password</label>
-                          <input type="password" className="form-control transparent-input text-white" minLength="1" maxLength="40" id="validationPassword2"
+                          <input type="password" className="form-control transparent-input text-white" minLength="8" maxLength="40" id="validationPassword2"
                             required onChange={ () => document.getElementById("validationPassword2").pattern = document.getElementById("validationPassword1").value} 
                             {...register("password")}></input>
                           <FeedbackInvalid/>
