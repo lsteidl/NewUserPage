@@ -140,7 +140,10 @@ class EntryPage extends React.Component {
 const occupations = []; // holds occupation options received from server
 const states = []; // holds state options received from server
 const abbrev = []; // holds occupations received from server
- 
+/*
+* Gets form data for States, Abbreviations and Occupations from server
+* Populates occupations, states and abbrev arrays with the data 
+*/ 
 const getFormData = async (obj) => {
     let status = -1;
     // get option data after component has loaded

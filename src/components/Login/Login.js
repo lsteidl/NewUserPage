@@ -20,6 +20,7 @@ class Login extends React.Component {
       form.className="was-validated";
   })  
  }
+ 
  render(){   
     return(
         <div className="container">

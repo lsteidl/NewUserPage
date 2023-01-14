@@ -98,7 +98,6 @@ currentView = () => {
   }
 }
 
-
 render(){   
         return(
           <section className="w-100">
