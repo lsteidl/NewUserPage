@@ -9,9 +9,9 @@ import { useForm } from "react-hook-form";
 * All fields are required. 
 *
 * Definitions of valid entries:
-* Name: Any String with length > 0
-* Email: [Any String with length > 0][@][Any String with length > 0][.][Any String of letters with length > 1].
-* Password: Any String with length > 7, password fields must match.
+* Name: Any String with length > 0 and < 51
+* Email: [Any String with length > 0][@][Any String with length > 0][.][Any String of letters with length > 1]. Length must be < 51.
+* Password: Any String with length > 7 and < 41, password fields must match.
 * State: Any of the select options.
 * Occupation: Any of the select options.
 */ 
@@ -69,12 +69,12 @@ function CustomForm(props) {
         postFormInfo(data);
       }
 
-    const { register, handleSubmit } = useForm();
+    const { register, handleSubmit} = useForm();
         return(
              <form id="signUpForm" className="needs-validation" align="center" noValidate onSubmit={handleSubmit(onSubmit)}>
                       <div className="has-validation text-start position-relative">
                         <label className="pt-1 form-label" id="inputName">Full Name</label>
-                        <input type="text" className="form-control transparent-input text-white" maxLength="50" id="validationName"
+                        <input type="text" className="form-control transparent-input text-white" id="validationName"
                         required {...register("name")} pattern="^.*$"></input>
                         <FeedbackInvalid/>
                         <FeedbackValid/>
@@ -82,22 +82,24 @@ function CustomForm(props) {
                       <div className="has-validation text-start position-relative">
                         <label className="pt-3 form-label" id="inputEmail">Email</label>
                         <input type="email" className="form-control transparent-input text-white" maxLength="50" id="validationEmail" 
-                        aria-describedby="inputGroupPrepend" required {...register("email")} pattern="^[A-Za-z0-9](([a-zA-Z0-9,=\.!\-#|\$%\^&\*\+/\?_`\{\}~]+)*)@(?:[0-9a-zA-Z-]+\.)+[a-zA-Z]{2,9}$"></input>
-                        <FeedbackInvalid />
+                          aria-describedby="inputGroupPrepend" required {...register("email")} 
+                          pattern="^[A-Za-z0-9](([a-zA-Z0-9,=\.!\-#|\$%\^&\*\+/\?_`\{\}~]+)*)@(?:[0-9a-zA-Z-]+\.)+[a-zA-Z]{2,9}$"></input>
+                        <FeedbackInvalid error="email"/>
                         <FeedbackValid/>
                       </div>
                         <div className="has-validation text-start position-relative">
                           <label className="pt-3 form-label" id="inputPass1">Password</label>
                           <input type="password" className="form-control transparent-input text-white" minLength="8" maxLength="40" id="validationPassword1"
-                          required onChange={ () => document.getElementById("validationPassword2").pattern = document.getElementById("validationPassword1").value} ></input>
+                            required onChange={ () => document.getElementById("validationPassword2").pattern = document.getElementById("validationPassword1").value} ></input>
                           <FeedbackInvalid error="length"/>
                           <FeedbackValid/>
                         </div>
                         <div className="has-validation text-start position-relative">
                           <label className="pt-3 form-label" id="inputPass2">Repeat Password</label>
-                          <input type="password" className="form-control transparent-input text-white" maxLength="40" id="validationPassword2"
-                          required {...register("password")}></input>
-                          <FeedbackInvalid error="passwordMatch"/>
+                          <input type="password" className="form-control transparent-input text-white" minLength="1" maxLength="40" id="validationPassword2"
+                            required onChange={ () => document.getElementById("validationPassword2").pattern = document.getElementById("validationPassword1").value} 
+                            {...register("password")}></input>
+                          <FeedbackInvalid/>
                           <FeedbackValid valid="passwordMatch"/>
                         </div>
                         <div className="has-validation text-start position-relative">
@@ -117,7 +119,7 @@ function CustomForm(props) {
                         <FeedbackValid/>
                       </div>
                     <div id="submitDiv" className="pt-5 d-grid">
-                      <button id="submitButton" className="btn myBtn text-white btn-outline-light btn-block" type="submit" >Submit form</button>
+                      <button id="submitButton" className="btn myBtn text-white btn-outline-light btn-block" type="submit">Submit form</button>
                       <button type="button" className="btn btn-link my-link mx-auto pt-3 text-white text-nowrap" onClick={() => props.grandParentCallback("login")}>Already Have an Account? Sign In.</button>
                     </div>
                   </form>

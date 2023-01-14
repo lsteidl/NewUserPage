@@ -26,7 +26,6 @@ class SignUp extends React.Component {
 */
 componentDidMount(){
   const form = document.getElementById("signUpForm");
-  console.log("validator is running\n");
     form.addEventListener('submit', event => {
       if (!form.checkValidity()) {
         event.preventDefault()
@@ -58,21 +57,19 @@ currentView = () => {
   switch(this.state.currentView) {
     case "form":
       return (
-        
         <div  className="container">
           <div className="card mx-auto shadow bg-transparent text-white col-sm-12 col-md-8 col-lg-5 blur-card position-relative" >
-            <h5 className="card-header text-white">Create Account
+            <h5 id="signUpHeader" className="invisible card-header text-white">Create Account
             <button id="submit1" type="button" className="btn btn-primary btn-sm" onClick={() => this.changeView("welcome")}>Success</button>
             <button id="submit1" type="button" className="btn btn-primary btn-sm" onClick={() => this.changeView("error")}> Fail</button>
             <button id="submit1" type="button" className="btn btn-primary btn-sm" onClick={() => this.props.parentCallback("home")}> Home</button>
-
             </h5>
             <div id="formLoading" className="position-absolute start-50 top-50 translate-middle">
               <div className="spinner-border" role="status">
                 <span className="visually-hidden">Loading...</span>
             </div>
             </div>
-                <div id="sign-up" className="invisible card-body">
+                <div id="signUp" className="invisible card-body">
                   <CustomForm setView={(value) => this.changeView(value)}
                               setEmail={(value) => this.changeEmail(value)}
                               setName={(value) => this.changeName(value)}
@@ -92,7 +89,7 @@ currentView = () => {
       )
       case "error":
         return (
-          <FormError />
+          <FormError/>
         )
       default:
           return (

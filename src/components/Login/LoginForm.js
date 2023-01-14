@@ -37,20 +37,20 @@ function LoginForm(props) {
              <form id="loginForm" className="needs-validation mx-auto" align="center" noValidate onSubmit={handleSubmit(onSubmit)}>
                 <div className="has-validation text-start position-relative">
                     <label className="pt-3 form-label" id="inputEmail">Email</label>
-                    <input type="email" className="form-control transparent-input text-white" id="validationEmail"
+                    <input type="email" maxLength="50" className="form-control transparent-input text-white" id="loginEmail"
                     aria-describedby="inputGroupPrepend" required {...register("email")} pattern="^[A-Za-z0-9](([a-zA-Z0-9,=\.!\-#|\$%\^&\*\+/\?_`\{\}~]+)*)@(?:[0-9a-zA-Z-]+\.)+[a-zA-Z]{2,9}$"></input>
                     <FeedbackInvalid error="email"/>
                     <FeedbackValid feedbackType="email"/>
                 </div>
                 <div className="has-validation text-start position-relative">
-                    <label className="pt-3 form-label" id="inputPass1" >Password</label>
-                    <input type="password" className="form-control transparent-input text-white" id="validationCustom03" 
+                    <label className="pt-3 form-label" id="inputPass1">Password</label>
+                    <input type="password" maxLength="40" className="form-control transparent-input text-white" id="loginPW" 
                     required></input>
                     <FeedbackInvalid error="password"/>
                     <FeedbackValid/>
                 </div>                        
                 <div id="submitDiv" className="pt-5 mx-auto d-grid">
-                    <button id="submitButton" className="btn myBtn text-white btn-outline-light btn-block" type="submit" >Sign In</button>
+                    <button id="submitButton" className="btn myBtn text-white btn-outline-light btn-block" type="submit">Sign In</button>
                 </div>
                 <div className="pt-5 row" align="center">
                     <button type="button"  className="btn btn-link my-link text-white text-nowrap" onClick={() => props.grandParentCallback("signUp")}>No Account Yet? Sign Up.</button>

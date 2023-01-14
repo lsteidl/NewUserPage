@@ -31,13 +31,6 @@ class FeedbackInvalid extends React.Component {
                 </div>
             )
         }
-        else if(this.props.error === "passwordMatch"){
-            return(
-                <div className="invalid-tooltip position-absolute top-100 end-0 text-nowrap">
-                Passwords do not match!
-                </div>
-            )
-        }
         else {
             return(
                 <div className="invalid-tooltip position-absolute top-100 end-0 text-nowrap">
