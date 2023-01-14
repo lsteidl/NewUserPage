@@ -23,7 +23,7 @@ Any valid email and passsword entered into the Login page will bring the user to
 ### Application Overview:
   EntryPage returns 1 of 4 components: SignUp, Login, HomePage or DataError.
 
-  SignUp returns 1 of 3 components: CustomForm, Success, or FormError.
+  SignUp returns 1 of 2 components: CustomForm, Success.
 
 ## How to run this project using Yarn
 
