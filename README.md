@@ -1,6 +1,6 @@
 # Entry Page for Application
 
-This project uses React and Bootstrap 5.2
+This project uses React and Bootstrap 5.2.
 
 Users can Create an Account, Log in, or view the HomePage as a guest.
 
@@ -8,11 +8,11 @@ CustomForm.js only allows form submission when all fields are valid.
 
 Definitions of valid entries:
 
-* Name: Any String with length > 0
+* Name: Any String (with length > 0 and length < 51).
 
-* Email: [Any String with length > 0][@][Any String with length > 0][.][Any String of letters with length > 1].
+* Email: [Any String with length > 0][@][Any String with length > 0][.][Any String of letters with length > 1]. Total length must be less than 51.
 
-* Password: Any String with length > 7, password fields must match.
+* Password: Any String (with length > 7 and length < 41), password fields must match.
 
 * State: Any of the select options.
 
@@ -21,18 +21,19 @@ Definitions of valid entries:
 Any valid email and passsword entered into the Login page will bring the user to the HomePage.
 
 ### Application Overview:
-EntryPage returns 1 of 4 components: SignUp, Login, HomePage or FormError.
+  EntryPage returns 1 of 4 components: SignUp, Login, HomePage or FormError.
 
-SignUp returns 1 of 3 components: CustomForm, Success, or FormError.
+  SignUp returns 1 of 3 components: CustomForm, Success, or FormError.
 
 ## How to run this project using Yarn
 
+Clone this repository and install dependencies.
 In the project directory, you can run:
 
 ### `yarn install`
 
 
-Next, in the project directory, you can run:
+Next, you can run:
 
 ### `yarn start`
 
@@ -45,8 +46,13 @@ Open [http://localhost:3000](http://localhost:3000) to view it in your browser.
 Builds the app for production to the `build` folder.\
 It correctly bundles React in production mode and optimizes the build for the best performance.
 
-The build is minified and the filenames include the hashes.\
+The build is minified and the filenames include the hashes.
 
 See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+
+
+### `yarn test`
+
+Runs tests using watch mode.
 
 
