@@ -21,9 +21,9 @@ Definitions of valid entries:
 Any valid email and passsword entered into the Login page will bring the user to the HomePage.
 
 ### Application Overview:
-  EntryPage returns 1 of 4 components: SignUp, Login, HomePage or DataError.
+  EntryPage returns 1 of 4 components: SignUp, Login, HomePage or FormError.
 
-  SignUp returns 1 of 2 components: CustomForm, Success.
+  SignUp returns 1 of 3 components: CustomForm, Success or FormError.
 
 ## How to run this project using Yarn
 
@@ -52,16 +52,23 @@ It correctly bundles React in production mode and optimizes the build for the be
 Runs tests using watch mode.
 
 
-## Screenshots
+## Desktop Screenshots
 
+
+<div align="center">
+  <img src="/Screenshots/desktop-create-both.jpg" width="800px"</img> 
+</div>
+<div align="center">
+  <img src="/Screenshots/desktop-login-valid.jpg" width="800px"</img> 
+</div>
+
+## Mobile Screenshots
 
 <div align="center">
   <img src="/Screenshots/iphone-11-valid.jpg" width="400px"</img> 
   <img src="/Screenshots/iphone-11-invalid.jpg" width="400px"</img> 
 </div>
-<div align="center">
-  <img src="/Screenshots/desktop-create-both.jpg" width="800px"</img> 
-</div>
+
 <div align="center">
   <img src="/Screenshots/iphone-11-loading.jpg" width="400px"</img> 
   <img src="/Screenshots/iphone-11-success.jpg" width="400px"</img> 
@@ -70,6 +77,4 @@ Runs tests using watch mode.
   <img src="/Screenshots/iphone-11-signin.jpg" width="400px"</img> 
   <img src="/Screenshots/iphone-11-home.jpg" width="400px"</img> 
 </div>
-<div align="center">
-  <img src="/Screenshots/desktop-login-valid.jpg" width="800px"</img> 
-</div>
+
