@@ -1,5 +1,7 @@
 # Entry Page for Application
 
+#### Live Demo Page: <a href="https://lsteidl.github.io/NewUserPage/"> https://lsteidl.github.io/NewUserPage/ </a> 
+
 This project uses React and Bootstrap 5.2.
 
 Users can Create an Account, Log in, or view the HomePage as a guest.
