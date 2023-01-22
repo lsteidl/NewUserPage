@@ -1,6 +1,6 @@
 import React from 'react';
-import FeedbackValid from '../../components/Feedback/FeedbackValid';
-import FeedbackInvalid from '../../components/Feedback/FeedbackInvalid';
+import FeedbackValid from './FeedbackValid';
+import FeedbackInvalid from './FeedbackInvalid';
 import { useForm } from "react-hook-form";
 
 /* 

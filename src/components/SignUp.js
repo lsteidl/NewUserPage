@@ -1,7 +1,7 @@
 import React from 'react';
 import CustomForm from './CustomForm';
 import Welcome from  './Welcome';
-import FormError from '../../components/Errors/FormError.js';
+import FormError from './FormError.js';
 
 /*
 * Allows user to create an account, 

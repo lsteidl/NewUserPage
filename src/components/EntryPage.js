@@ -1,8 +1,8 @@
 import React from 'react';
-import SignUp from '../../components/SignUp/SignUp.js';
-import Login from '../../components/Login/Login.js';
-import HomePage from '../../components/HomePage/HomePage';
-import FormError from '../../components/Errors/FormError';
+import SignUp from './SignUp.js';
+import Login from './Login.js';
+import HomePage from './HomePage';
+import FormError from './FormError';
 
 /*
 * This is the main component returned by App.js
