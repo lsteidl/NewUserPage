@@ -16,7 +16,7 @@ class Welcome extends React.Component {
                         <p> Please click the validation link in the email to verify your account.</p>
                         <div className="text-center">
                             <button type="button" className=" mx-auto btn btn-link my-link text-white text-center text-nowrap" 
-                                onClick={() => this.props.grandParentCallback("home")}>Continue as a Guest.</button>
+                                onClick={() => this.props.changeView("home")}>Continue as a Guest.</button>
                         </div>
 
                     </div>

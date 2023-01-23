@@ -1,6 +1,5 @@
 import React from 'react';
-import FeedbackValid from './FeedbackValid';
-import FeedbackInvalid from './FeedbackInvalid';
+import Feedback from './Feedback';
 import { useForm } from "react-hook-form";
 
 
@@ -39,15 +38,15 @@ function LoginForm(props) {
                     <label className="pt-3 form-label" id="inputEmail">Email</label>
                     <input type="email" maxLength="50" className="form-control transparent-input text-white" id="loginEmail"
                     aria-describedby="inputGroupPrepend" required {...register("email")} pattern="^[A-Za-z0-9](([a-zA-Z0-9,=\.!\-#|\$%\^&\*\+/\?_`\{\}~]+)*)@(?:[0-9a-zA-Z-]+\.)+[a-zA-Z]{2,9}$"></input>
-                    <FeedbackInvalid error="email"/>
-                    <FeedbackValid feedbackType="email"/>
+                    <Feedback error="email"/>
+                    <Feedback valid="email"/>
                 </div>
                 <div className="has-validation text-start position-relative">
                     <label className="pt-3 form-label" id="inputPass1">Password</label>
                     <input type="password" minLength="1" maxLength="40" className="form-control transparent-input text-white" id="loginPW" 
                     required></input>
-                    <FeedbackInvalid error="password"/>
-                    <FeedbackValid/>
+                    <Feedback error="password"/>
+                    <Feedback valid="looksGood"/>
                 </div>                        
                 <div id="submitDiv" className="pt-5 mx-auto d-grid">
                     <button id="submitButton" className="btn myBtn text-white btn-outline-light btn-block" type="submit">Sign In</button>

@@ -3,6 +3,7 @@ import SignUp from './SignUp.js';
 import Login from './Login.js';
 import HomePage from './HomePage';
 import FormError from './FormError';
+import Welcome from './Welcome';
 
 /*
 * This is the main component returned by App.js
@@ -14,7 +15,8 @@ class EntryPage extends React.Component {
     super(props);
     this.state = {
       currentView: "signUp",
-      email: "",
+      name: "DEFAULT_NAME",
+      email: "DEFAULT@MAIL.COM"
     }
   }
   /*
@@ -43,6 +45,16 @@ class EntryPage extends React.Component {
   changeView = (view) => {
     this.setState({
       currentView: view
+    })
+  }
+  changeEmail = (email) => {
+    this.setState({
+      email: email
+    })
+  }
+  changeName = (name) => {
+    this.setState({
+      name: name
     })
   }
   /*
@@ -97,7 +109,9 @@ class EntryPage extends React.Component {
         this.loadFormData(); // reload Occupation and State options
         return (
           <SignUp 
-            parentCallback = {(value)=>this.changeView(value)}
+            setView = {(value)=>this.changeView(value)}
+            setEmail = {(value)=>this.changeEmail(value)}
+            setName = {(value)=>this.changeName(value)}
           />
         )
       case "login":
@@ -105,14 +119,24 @@ class EntryPage extends React.Component {
         return (
             <Login
               parentCallback = {(value)=>this.changeView(value)}
+              changeEmail = {(value)=>this.changeEmail(value)}
+              changeName = {(value)=>this.changeName(value)}
             />
         )
+        case "welcome":
+          return (
+            <Welcome 
+            email = {this.state.email}
+            name = {this.state.name}
+            changeView = {(value) => this.changeView(value)}
+            />
+          )
         case "home":
           this.updateTitle("Home");
           return (
               <HomePage
-                parentCallback = {(value)=>this.changeView(value)}
-                parentBackground = {(value)=>this.changeBackground(value)}
+                changeView = {(value)=>this.changeView(value)}
+                changeBackground = {(value)=>this.changeBackground(value)}
               />
           )
         case "error":
@@ -120,6 +144,11 @@ class EntryPage extends React.Component {
           return (
                 <FormError 
                   errorType="loading"/>
+          )
+        case "sign-up-error":
+          this.updateTitle("Error");
+          return (
+            <FormError/>
           )
         default:
           this.updateTitle("Error");

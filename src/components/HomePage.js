@@ -19,7 +19,7 @@ componentDidMount(){
 * Disables the button for the current background to prevent reselection
 */
   handleSelection(buttonId){
-    this.props.parentBackground(buttonId); // update background
+    this.props.changeBackground(buttonId); // update background
     let buttonWood = document.getElementById("wood");
     let buttonSpace = document.getElementById("space");
     let buttonAbstract = document.getElementById("abstract");
@@ -49,7 +49,7 @@ componentDidMount(){
   */
   signOut(){
     this.handleSelection("abstract"); // reset background to default, no customization while logged out
-    this.props.parentCallback("login");
+    this.props.changeView("login");
   }
   render(){   
     return(

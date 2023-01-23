@@ -1,6 +1,5 @@
 import React from 'react';
-import FeedbackValid from './FeedbackValid';
-import FeedbackInvalid from './FeedbackInvalid';
+import Feedback from './Feedback';
 import { useForm } from "react-hook-form";
 
 /* 
@@ -128,51 +127,51 @@ function CustomForm(props) {
                         <label className="pt-1 form-label" id="inputName">Full Name</label>
                         <input type="text" className="form-control transparent-input text-white" id="validationName"
                         required {...register("name")} pattern="^.*$"></input>
-                        <FeedbackInvalid/>
-                        <FeedbackValid/>
+                        <Feedback error = "tryAgain"/>
+                        <Feedback valid="looksGood"/>
                       </div>
                       <div className="has-validation text-start position-relative">
                         <label className="pt-3 form-label" id="inputEmail">Email</label>
                         <input type="email" className="form-control transparent-input text-white" maxLength="50" id="validationEmail" 
                           aria-describedby="inputGroupPrepend" required {...register("email")} 
                           pattern="^[A-Za-z0-9](([a-zA-Z0-9,=\.!\-#|\$%\^&\*\+/\?_`\{\}~]+)*)@(?:[0-9a-zA-Z-]+\.)+[a-zA-Z]{2,9}$"></input>
-                        <FeedbackInvalid error="email"/>
-                        <FeedbackValid/>
+                        <Feedback error="email"/>
+                        <Feedback valid="looksGood"/>
                       </div>
                         <div className="has-validation text-start position-relative">
                           <label className="pt-3 form-label" id="inputPass1">Password</label>
                           <input type="password" className="form-control transparent-input text-white" minLength="8" maxLength="40" id="validationPassword1"
                             required onChange={ () => document.getElementById("validationPassword2").pattern = document.getElementById("validationPassword1").value} ></input>
-                          <FeedbackInvalid error="length"/>
-                          <FeedbackValid/>
+                          <Feedback error="length"/>
+                          <Feedback valid="looksGood"/>
                         </div>
                         <div className="has-validation text-start position-relative">
                           <label className="pt-3 form-label" id="inputPass2">Repeat Password</label>
                           <input type="password" className="form-control transparent-input text-white" minLength="8" maxLength="40" id="validationPassword2"
-                            required onChange={ () => document.getElementById("validationPassword2").pattern = document.getElementById("validationPassword1").value} 
+                            required pattern="-1" 
                             {...register("password")}></input>
-                          <FeedbackInvalid/>
-                          <FeedbackValid valid="passwordMatch"/>
+                          <Feedback error = "tryAgain"/>
+                          <Feedback valid="passwordMatch"/>
                         </div>
                         <div className="has-validation text-start position-relative">
                           <label className="pt-3 form-label" id="inputState">State</label>
                           <select defaultValue="" className="form-control form-select transparent-input text-white" id="validationState" required {...register("state")}>
                             <option disabled value="">Choose...</option>
                           </select>
-                          <FeedbackInvalid/>
-                          <FeedbackValid/>
+                          <Feedback error = "tryAgain"/>
+                          <Feedback valid="looksGood"/>
                         </div>
                       <div className="has-validation text-start position-relative">
                         <label className="pt-3 form-label" id="inputOccu">Occupation</label>
                         <select defaultValue="" className="form-control form-select transparent-input text-white" aria-label="select example" id="validationOccu" required {...register("occupation")}>
                           <option disabled value="">Choose...</option>
                         </select>
-                        <FeedbackInvalid/>
-                        <FeedbackValid/>
+                        <Feedback error = "tryAgain"/>
+                        <Feedback valid="looksGood"/>
                       </div>
                     <div id="submitDiv" className="pt-5 d-grid">
                       <button id="submitButton" className="btn myBtn text-white btn-outline-light btn-block" type="submit">Submit form</button>
-                      <button type="button" className="btn btn-link my-link mx-auto pt-3 text-white text-nowrap" onClick={() => props.grandParentCallback("login")}>Already Have an Account? Sign In.</button>
+                      <button type="button" className="btn btn-link my-link mx-auto pt-3 text-white text-nowrap" onClick={() => props.setView("login")}>Already Have an Account? Sign In.</button>
                     </div>
                   </form>
         )
