@@ -1,6 +1,5 @@
 import React from 'react';
-import SignUp from './SignUp.js';
-import Login from './Login.js';
+import Container from './Container.js';
 import HomePage from './HomePage';
 import FormError from './FormError';
 import Welcome from './Welcome';
@@ -108,7 +107,8 @@ class EntryPage extends React.Component {
         this.updateTitle("Create Account");
         this.loadFormData(); // reload Occupation and State options
         return (
-          <SignUp 
+          <Container 
+            type="signUp"
             setView = {(value)=>this.changeView(value)}
             setEmail = {(value)=>this.changeEmail(value)}
             setName = {(value)=>this.changeName(value)}
@@ -117,10 +117,9 @@ class EntryPage extends React.Component {
       case "login":
         this.updateTitle("Login");
         return (
-            <Login
-              parentCallback = {(value)=>this.changeView(value)}
-              changeEmail = {(value)=>this.changeEmail(value)}
-              changeName = {(value)=>this.changeName(value)}
+            <Container
+              type="login"
+              setView = {(value)=>this.changeView(value)}
             />
         )
         case "welcome":
@@ -135,8 +134,8 @@ class EntryPage extends React.Component {
           this.updateTitle("Home");
           return (
               <HomePage
-                changeView = {(value)=>this.changeView(value)}
-                changeBackground = {(value)=>this.changeBackground(value)}
+                setView = {(value)=>this.changeView(value)}
+                setBackground = {(value)=>this.changeBackground(value)}
               />
           )
         case "error":
@@ -153,8 +152,8 @@ class EntryPage extends React.Component {
         default:
           this.updateTitle("Error");
           return (
-                <FormError 
-                  errorType="default"/>
+            <FormError 
+              errorType="default"/>
           )
     }
   }

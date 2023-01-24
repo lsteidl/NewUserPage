@@ -7,57 +7,33 @@ import React from 'react';
 */
 class FeedbackValid extends React.Component {
   render(){
-    if(this.props.valid === "passwordMatch"){
+    var className = "";
+    var message = "";
+    
+    if(this.props.valid){
+      className = ["valid-tooltip position-absolute top-100 end-0 text-nowrap"];
+      switch(this.props.valid){
+        case "passwordMatch": message = "Passwords Match!"; break;
+        case "looksGood": message = "Looks good!"; break;
+        case "email": message = "Email is valid!"; break;
+        default: message = "Looks good!"; break;
+      }
+    }
+    else if(this.props.error){
+      className=["invalid-tooltip position-absolute top-100 end-0 text-nowrap"];
+      switch(this.props.error){
+        case "email": message = "Please enter a valid email."; break;
+        case "password": message = "Please enter a password."; break;
+        case "length": message = "Minimum Password Length: 4"; break;
+        case "tryAgain": message = "Try Again!"; break;
+        default: message = "Try Again!"; break;
+      }
+    }
       return(
-        <div className="valid-tooltip position-absolute top-100 end-0 text-nowrap">
-          Passwords Match!
+        <div className={className}>
+          {message}
         </div>
       )
     }
-    else if (this.props.valid === "looksGood") {
-      return(
-        <div className="valid-tooltip position-absolute top-100 end-0 text-nowrap">
-          Looks good!
-        </div>
-      )
-    }
-    else if (this.props.valid === "email") {
-      return(
-        <div className="valid-tooltip position-absolute top-100 end-0 text-nowrap">
-          Email is valid!
-        </div>
-      )
-    }
-    else if(this.props.error === "email"){
-      return(
-          <div className="invalid-tooltip position-absolute top-100 end-0 text-nowrap">
-            Please enter a valid email.
-          </div>
-      )
-    }
-    else if(this.props.error === "password"){
-        return(
-            <div className="invalid-tooltip position-absolute top-100 end-0 text-nowrap">
-              Please enter a password.
-            </div>
-        )
-    }
-    // Sign Up Page feedback
-    else if(this.props.error === "length"){
-        return(
-            <div className="invalid-tooltip position-absolute top-100 end-0 text-nowrap">
-              Minimum Password Length: 8
-            </div>
-        )
-    }
-    else if(this.props.error === "tryAgain"){
-        return(
-            <div className="invalid-tooltip position-absolute top-100 end-0 text-nowrap">
-              Try Again!
-            </div>
-        )
-    }
-    }
-
 }
 export default FeedbackValid;
