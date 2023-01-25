@@ -4,6 +4,9 @@
 
 This project uses React and Bootstrap 5.2. Form options (States and Occupations) are retrieved from my Node.js endpoint hosted on Google's Firebase at https://newuserpage-a9fa8.web.app/formData.
 
+### Application Overview:
+  EntryPage returns 1 of 4 components: SignUp, Login, HomePage, Success or FormError.
+
 Users can Create an Account, Log in, or view the HomePage as a guest.
 
 CustomForm.js only allows form submission when all fields are valid.
@@ -14,7 +17,7 @@ Definitions of valid entries:
 
 * Email: [Any String with length > 0][@][Any String with length > 0][.][Any String of letters with length > 1]. Total length must be less than 51.
 
-* Password: Any String (with length > 7 and length < 41), password fields must match.
+* Password: Any String (with length > 3 and length < 41), password fields must match.
 
 * State: Any of the select options.
 
@@ -22,10 +25,7 @@ Definitions of valid entries:
 
 Any valid email and passsword entered into the Login page will bring the user to the HomePage.
 
-### Application Overview:
-  EntryPage returns 1 of 4 components: SignUp, Login, HomePage or FormError.
-
-  SignUp returns 1 of 3 components: CustomForm, Success or FormError.
+  
 
 ## How to run this project using Yarn
 
