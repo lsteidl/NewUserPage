@@ -2,7 +2,7 @@
 
 #### Live Demo Page: <a href="https://lsteidl.github.io/NewUserPage/"> https://lsteidl.github.io/NewUserPage/ </a> 
 
-This project uses React and Bootstrap 5.2.
+This project uses React and Bootstrap 5.2. Form options (States and Occupations) are retrieved from my Node.js endpoint hosted on Google's Firebase at https://newuserpage-a9fa8.web.app/formData.
 
 Users can Create an Account, Log in, or view the HomePage as a guest.
 
