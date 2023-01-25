@@ -175,7 +175,7 @@ const abbrev = []; // holds occupations received from server
 const getFormData = async (obj) => {
     let status = -1;
     // get option data after component has loaded
-    await fetch("https://frontend-take-home.fetchrewards.com/form")
+    await fetch("https://newuserpage-a9fa8.web.app/formData")
     .then(response => { 
     status = response.status;
     if (status !== 200){
