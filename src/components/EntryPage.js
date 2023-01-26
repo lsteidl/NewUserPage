@@ -18,6 +18,24 @@ class EntryPage extends React.Component {
       email: "DEFAULT@MAIL.COM"
     }
   }
+  // Authentication
+  // authenticate(data){
+  //   const auth = getAuth();
+  //   createUserWithEmailAndPassword(auth, data.email, data.password)
+  //     .then((userCredential) => {
+  //       // Signed in 
+  //       const user = userCredential.user;
+  //       console.log("new user signed in");
+  //       // ...
+  //     })
+  //     .catch((error) => {
+  //       const errorCode = error.code;
+  //       const errorMessage = error.message;
+  //       console.log(errorCode + errorMessage);
+  //       // ..
+  //     });   
+  // }
+
   /*
   * Gets form data 
   * Completes form options
@@ -108,6 +126,7 @@ class EntryPage extends React.Component {
         this.loadFormData(); // reload Occupation and State options
         return (
           <Container 
+            auth={this.props.auth}
             type="signUp"
             setView = {(value)=>this.changeView(value)}
             setEmail = {(value)=>this.changeEmail(value)}
@@ -118,6 +137,7 @@ class EntryPage extends React.Component {
         this.updateTitle("Login");
         return (
             <Container
+              auth={this.props.auth}
               type="login"
               setView = {(value)=>this.changeView(value)}
             />

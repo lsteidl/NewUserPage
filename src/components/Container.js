@@ -93,7 +93,9 @@ class Container extends React.Component {
             </h5>
             {loading}
                 <div id={cardBodyId} className={cardBodyClass}>
-                  <Form type={formType}
+                  <Form       
+                              auth={this.props.auth}
+                              type={formType}
                               setView={(value) => this.props.setView(value)}
                               setEmail={(value) => this.props.setEmail(value)}
                               setName={(value) => this.props.setName(value)}

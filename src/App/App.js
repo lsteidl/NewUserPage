@@ -5,10 +5,10 @@ import EntryPage from '../components/EntryPage';
 /*
 * Returns the App's main component, EntryPage 
 */
-function App() {
+function App(props) {
   
   return (
-      <EntryPage className='page-full'> </EntryPage>
+      <EntryPage auth={props.auth} className='page-full'> </EntryPage>
   );
 }
 export default App;

@@ -1,6 +1,7 @@
 import React from 'react';
 import Feedback from './Feedback';
 import { useForm } from "react-hook-form";
+import { signOut, createUserWithEmailAndPassword, signInWithEmailAndPassword } from "firebase/auth";
 
 /* 
 * Account Sign Up / Login form with validation.
@@ -21,39 +22,89 @@ import { useForm } from "react-hook-form";
 */ 
 function Form(props) {
   /*
-  * POSTs valid info to 'https://frontend-take-home.fetchrewards.com/form'
+  * POSTs valid info to Firebase project
   * Redirects user to Welcome or FormError page depending on POST response status.
   */ 
-    function postFormInfo(data){
-        var status = -1;
-        fetch('https://frontend-take-home.fetchrewards.com/form', {
-          method: 'POST',
-          headers: {
-              'Accept': 'application/json',
-              'Content-Type': 'application/json'
-          },
-          body: JSON.stringify(data)
-        })
-        .then(response => { 
-          status = response.status;
-          if (status === 201){
+    // function postFormInfo(data){
+    //     var status = -1;
+    //     fetch('https://', {
+    //       method: 'POST',
+    //       headers: {
+    //           'Accept': 'application/json',
+    //           'Content-Type': 'application/json'
+    //       },
+    //       body: JSON.stringify(data)
+    //     })
+    //     .then(response => { 
+    //       status = response.status;
+    //       if (status === 201){
+    //         let email = document.getElementById("validationEmail").value;
+    //         let name = document.getElementById("validationName").value;
+    //         props.setEmail(email); // Pass email info back to SignUp to be used by Welcome
+    //         props.setName(name); // Pass name info back to SignUp to be used by Welcome
+    //         props.setView("welcome") // Switch to welcome page
+    //       }
+    //       else {
+    //         props.setView("error")
+    //       }
+    //       return response; })
+    //     .then(response => response.json())
+    //     .then(data => console.log(JSON.stringify(data)))
+    //     .catch(err => { 
+    //       console.log('Request Failed', err)
+    //       props.setView("error")
+    //     });
+        
+    //   }
+      function createEmailPassword(data){
+        console.log("DATA: " + data.email + " and " + data.password);
+       // const auth = getAuth();
+        console.log("props.auth: " + props.auth);
+        createUserWithEmailAndPassword(props.auth, data.email, data.password)
+          .then((userCredential) => {
+            // Signed in 
+            const user = userCredential.user;
+            console.log("new user signed in: " + user);
+            console.log(userCredential);
             let email = document.getElementById("validationEmail").value;
             let name = document.getElementById("validationName").value;
             props.setEmail(email); // Pass email info back to SignUp to be used by Welcome
             props.setName(name); // Pass name info back to SignUp to be used by Welcome
             props.setView("welcome") // Switch to welcome page
-          }
-          else {
-            props.setView("error")
-          }
-          return response; })
-        .then(response => response.json())
-        .then(data => console.log(JSON.stringify(data)))
-        .catch(err => { 
-          console.log('Request Failed', err)
-          props.setView("error")
-        });
-        
+            // ...
+          })
+          .catch((error) => {
+            const errorCode = error.code;
+            const errorMessage = error.message;
+            console.log(errorCode + errorMessage);
+            // ..
+          });  
+
+      }
+      function signInn(data){
+        // signOut(props.auth).then(() => {
+        //   // Sign-out successful.
+        // }).catch((error) => {
+        //   // An error happened.
+        // });
+        console.log("Before sign in call");
+        console.log("using.." + data.email +" and " + data.password);
+        console.log("props.auth: " + props.auth);
+        signInWithEmailAndPassword(props.auth, data.email, data.password)
+          .then((userCredential) => {
+            // Signed in 
+            const user = userCredential.user;
+            console.log("SIGN IN SUCCESSFUL");
+            console.log(user);
+            props.setView("home") // Switch to welcome page
+
+            // ...
+          })
+          .catch((error) => {
+            const errorCode = error.code;
+            const errorMessage = error.message;
+          });
+          console.log("After sign in call");
       }
       /*
       * check name validity
@@ -84,7 +135,7 @@ function Form(props) {
       * return true if password is valid
       */
       function checkPassword(password){
-        if(password.length > 3 && password.length < 41){
+        if(password.length > 5 && password.length < 41){
           return true;
         }
         else{
@@ -106,11 +157,12 @@ function Form(props) {
       * Handles form submission for Sign Up
       * Modifies 'submit form' button to indicate form is being processed
       */
-      function onSignUp(data){
+      function userSignUp(data){
         // prepare loading symbol
         let element = document.getElementById("signUpButton");
         element.innerText = "Loading...";
         const span = document.createElement("span");
+        span.id ="signUpLoading";
         span.role = "status";
         span.className="spinner-border spinner-border-sm";
         element.appendChild(span);
@@ -118,7 +170,7 @@ function Form(props) {
         data.state = data.state.split(" ")[0]; // eliminate abbreviation from state string, only pass name of the State
         console.log(data);
         if(checkFormData(data)){ // final data check
-          postFormInfo(data);
+          createEmailPassword(data);
         }
         else{
           props.setView("error");
@@ -129,7 +181,9 @@ function Form(props) {
       */ 
       function postLoginInfo(data){
        if(checkEmail(data.email) && checkPassword(data.password)){
-          props.setView("home");
+          console.log("CALLING SIGN IN");
+          console.log(data.email +" and " + data.password);
+          signInn(data);
         }
         else{
           props.setView("error");
@@ -138,15 +192,17 @@ function Form(props) {
       /* 
       * Modifies log in button to indicate form is being processed
       */
-      function onLogin(data){
-        console.log("onLogin(data)");
-          let element = document.getElementById("loginButton");
-          element.innerText = "Loading...";
-          const span = document.createElement("span");
-          span.role = "status";
-          span.className="spinner-border spinner-border-sm";
-          element.appendChild(span);
-          postLoginInfo(data);
+      function userLogin(data){
+        //createEmailPassword(data);
+        console.log("userLogin(data)");
+        let element = document.getElementById("loginButton");
+        element.innerText = "Loading...";
+        const span = document.createElement("span");
+        span.id = "loginLoading";
+        span.role = "status";
+        span.className="spinner-border spinner-border-sm";
+        element.appendChild(span);
+        postLoginInfo(data);
       }
     // define shared variables
     const { register, handleSubmit} = useForm();
@@ -169,9 +225,9 @@ function Form(props) {
     if(props.type === "signUp"){
       signUpForm = true;
       formId = "signUpForm";
-      submitFunction = onSignUp;
+      submitFunction = userSignUp;
       passwordError = "length";
-      passwordLength = "4";
+      passwordLength = "6";
       submit = 
         <div id="submitDiv" className="pt-5 d-grid">
           <button id="signUpButton" className={buttonClassName} type="submit"> Submit form </button>
@@ -181,7 +237,7 @@ function Form(props) {
     else if(props.type === "login"){
       signUpForm = false;
       formId = "loginForm";
-      submitFunction = onLogin;
+      submitFunction = userLogin;
       passwordError = "password";
       passwordLength = "1";
       submit =               
