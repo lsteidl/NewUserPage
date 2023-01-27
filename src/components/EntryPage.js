@@ -3,6 +3,7 @@ import Container from './Container.js';
 import HomePage from './HomePage';
 import FormError from './FormError';
 import Welcome from './Welcome';
+import { getAuth, onAuthStateChanged } from "firebase/auth";
 
 /*
 * This is the main component returned by App.js
@@ -13,28 +14,45 @@ class EntryPage extends React.Component {
   constructor(props){
     super(props);
     this.state = {
+      signedIn: false,
       currentView: "signUp",
       name: "DEFAULT_NAME",
       email: "DEFAULT@MAIL.COM"
     }
   }
-  // Authentication
-  // authenticate(data){
-  //   const auth = getAuth();
-  //   createUserWithEmailAndPassword(auth, data.email, data.password)
-  //     .then((userCredential) => {
-  //       // Signed in 
-  //       const user = userCredential.user;
-  //       console.log("new user signed in");
-  //       // ...
-  //     })
-  //     .catch((error) => {
-  //       const errorCode = error.code;
-  //       const errorMessage = error.message;
-  //       console.log(errorCode + errorMessage);
-  //       // ..
-  //     });   
-  // }
+  changeView = (view) => {
+    this.setState({
+      currentView: view
+    })
+  }
+  changeEmail = (email) => {
+    this.setState({
+      email: email
+    })
+  }
+  changeName = (name) => {
+    this.setState({
+      name: name
+    })
+  }
+componentDidMount(){
+    // Authentication
+    this.authFirebaseListener = onAuthStateChanged(this.props.auth, (user) => {
+      if (user) {
+        // User is signed in, see docs for a list of available properties
+        // https://firebase.google.com/docs/reference/js/firebase.User
+        const uid = user.uid;
+        this.setState({signedIn: true})
+        this.changeView("home");
+        // ...
+      } else {
+        // User is signed out
+        this.setState({signedIn: false})
+        this.changeView("login");
+      }
+    })
+}
+
 
   /*
   * Gets form data 
@@ -59,21 +77,6 @@ class EntryPage extends React.Component {
     loading.classList.add("invisible");
   }
 
-  changeView = (view) => {
-    this.setState({
-      currentView: view
-    })
-  }
-  changeEmail = (email) => {
-    this.setState({
-      email: email
-    })
-  }
-  changeName = (name) => {
-    this.setState({
-      name: name
-    })
-  }
   /*
   * Only accessable by Logged In Users.
   * Background resets to default after logging out.
@@ -154,6 +157,7 @@ class EntryPage extends React.Component {
           this.updateTitle("Home");
           return (
               <HomePage
+                auth={this.props.auth}
                 setView = {(value)=>this.changeView(value)}
                 setBackground = {(value)=>this.changeBackground(value)}
               />

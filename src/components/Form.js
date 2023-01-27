@@ -25,170 +25,131 @@ function Form(props) {
   * POSTs valid info to Firebase project
   * Redirects user to Welcome or FormError page depending on POST response status.
   */ 
-    // function postFormInfo(data){
-    //     var status = -1;
-    //     fetch('https://', {
-    //       method: 'POST',
-    //       headers: {
-    //           'Accept': 'application/json',
-    //           'Content-Type': 'application/json'
-    //       },
-    //       body: JSON.stringify(data)
-    //     })
-    //     .then(response => { 
-    //       status = response.status;
-    //       if (status === 201){
-    //         let email = document.getElementById("validationEmail").value;
-    //         let name = document.getElementById("validationName").value;
-    //         props.setEmail(email); // Pass email info back to SignUp to be used by Welcome
-    //         props.setName(name); // Pass name info back to SignUp to be used by Welcome
-    //         props.setView("welcome") // Switch to welcome page
-    //       }
-    //       else {
-    //         props.setView("error")
-    //       }
-    //       return response; })
-    //     .then(response => response.json())
-    //     .then(data => console.log(JSON.stringify(data)))
-    //     .catch(err => { 
-    //       console.log('Request Failed', err)
-    //       props.setView("error")
-    //     });
-        
-    //   }
-      function createEmailPassword(data){
-        console.log("DATA: " + data.email + " and " + data.password);
-       // const auth = getAuth();
-        console.log("props.auth: " + props.auth);
-        createUserWithEmailAndPassword(props.auth, data.email, data.password)
-          .then((userCredential) => {
-            // Signed in 
-            const user = userCredential.user;
-            console.log("new user signed in: " + user);
-            console.log(userCredential);
-            let email = document.getElementById("validationEmail").value;
-            let name = document.getElementById("validationName").value;
-            props.setEmail(email); // Pass email info back to SignUp to be used by Welcome
-            props.setName(name); // Pass name info back to SignUp to be used by Welcome
-            props.setView("welcome") // Switch to welcome page
-            // ...
-          })
-          .catch((error) => {
-            const errorCode = error.code;
-            const errorMessage = error.message;
-            console.log(errorCode + errorMessage);
-            // ..
-          });  
-
-      }
-      function signInn(data){
-        // signOut(props.auth).then(() => {
-        //   // Sign-out successful.
-        // }).catch((error) => {
-        //   // An error happened.
-        // });
-        console.log("Before sign in call");
-        console.log("using.." + data.email +" and " + data.password);
-        console.log("props.auth: " + props.auth);
-        signInWithEmailAndPassword(props.auth, data.email, data.password)
-          .then((userCredential) => {
-            // Signed in 
-            const user = userCredential.user;
-            console.log("SIGN IN SUCCESSFUL");
-            console.log(user);
-            props.setView("home") // Switch to welcome page
-
-            // ...
-          })
-          .catch((error) => {
-            const errorCode = error.code;
-            const errorMessage = error.message;
-          });
-          console.log("After sign in call");
-      }
-      /*
-      * check name validity
-      */
-      function checkName(name){
-        if(name.length > 50 || name.length === 0){
-          return false;
-        }
-        else{
-          return true;
-        }
-      }
-      /*
-      * check email validity
-      * future use: verify email is not yet taken
-      */
-      function checkEmail(email){
-        if(email.length > 50) 
-          return false;
-        if(/^[A-Za-z0-9](([a-zA-Z0-9,=.!\-#|$%^&*+/?_`{}~]+)*)@(?:[0-9a-zA-Z-]+.)+[a-zA-Z]{2,9}$/.test(email)){
-          return true;
-        }
-        else{
-          return false;
-        }
-      }
-      /*
-      * return true if password is valid
-      */
-      function checkPassword(password){
-        if(password.length > 5 && password.length < 41){
-          return true;
-        }
-        else{
-          return false;
-        }
-      }
-      /*
-      * return true if Sign up form data is valid
-      */
-      function checkFormData(data){
-        if(checkName(data.name) && checkEmail(data.email) && checkPassword(data.password)){
-          return true;
-        }
-        else{
-          return false;
-        }
-      }
-      /*
-      * Handles form submission for Sign Up
-      * Modifies 'submit form' button to indicate form is being processed
-      */
-      function userSignUp(data){
-        // prepare loading symbol
-        let element = document.getElementById("signUpButton");
-        element.innerText = "Loading...";
-        const span = document.createElement("span");
-        span.id ="signUpLoading";
-        span.role = "status";
-        span.className="spinner-border spinner-border-sm";
-        element.appendChild(span);
-        // prepare data
-        data.state = data.state.split(" ")[0]; // eliminate abbreviation from state string, only pass name of the State
-        console.log(data);
-        if(checkFormData(data)){ // final data check
-          createEmailPassword(data);
-        }
-        else{
-          props.setView("error");
-        }
-      }
-      /*
-      * Any valid Email and Password entry directs user to HomePage.
-      */ 
-      function postLoginInfo(data){
-       if(checkEmail(data.email) && checkPassword(data.password)){
-          console.log("CALLING SIGN IN");
-          console.log(data.email +" and " + data.password);
-          signInn(data);
-        }
-        else{
-          props.setView("error");
-        }
-      }
+  function createEmailPassword(data){
+    console.log("DATA: " + data.email + " and " + data.password);
+    // const auth = getAuth();
+    console.log("props.auth: " + props.auth);
+    createUserWithEmailAndPassword(props.auth, data.email, data.password)
+      .then((userCredential) => {
+        // Signed in 
+        const user = userCredential.user;
+        console.log("new user signed in: " + user);
+        console.log(userCredential);
+        let email = document.getElementById("validationEmail").value;
+        let name = document.getElementById("validationName").value;
+        props.setEmail(email); // Pass email info back to SignUp to be used by Welcome
+        props.setName(name); // Pass name info back to SignUp to be used by Welcome
+        props.setView("welcome") // Switch to welcome page
+        // ...
+      })
+      .catch((error) => {
+        const errorCode = error.code;
+        const errorMessage = error.message;
+        console.log(errorCode + errorMessage);
+        // ..
+      });  
+  }
+  function signIn(data){
+    signInWithEmailAndPassword(props.auth, data.email, data.password)
+      .then((userCredential) => {
+        // Signed in 
+        const user = userCredential.user;
+        console.log("SIGN IN SUCCESSFUL from FORM PAGE");
+        console.log(user);
+        // props.setView("home") // Switch to welcome page
+        // ...
+      })
+      .catch((error) => {
+        const errorCode = error.code;
+        const errorMessage = error.message;
+        console.log("Error with sign in, " + error.code + " " + error.message);
+        // show invalid credentials alert
+        let alert = document.getElementById("loginFailedAlert");
+        alert.classList.remove("invisible");
+        // change button back to normal
+        let span = document.getElementById("loginLoading");
+        span.remove();
+        let element = document.getElementById("loginButton");
+        element.innerText = "Submit";
+        // reset form 
+        let form = document.getElementById("loginForm");
+        form.classList.add("has-validation"); // this is not working
+        form.classList.remove("needs-validation"); // this is not working
+        form.reset(); // maybe only clear the password field?
+        // move input selection back to username
+      });
+      console.log("After sign in call");
+  }
+  /*
+  * check name validity
+  */
+  function checkName(name){
+    if(name.length > 50 || name.length === 0){
+      return false;
+    }
+    else{
+      return true;
+    }
+  }
+  /*
+  * check email validity
+  * future use: verify email is not yet taken
+  */
+  function checkEmail(email){
+    if(email.length > 50) 
+      return false;
+    if(/^[A-Za-z0-9](([a-zA-Z0-9,=.!\-#|$%^&*+/?_`{}~]+)*)@(?:[0-9a-zA-Z-]+.)+[a-zA-Z]{2,9}$/.test(email)){
+      return true;
+    }
+    else{
+      return false;
+    }
+  }
+  /*
+  * return true if password is valid
+  */
+  function checkPassword(password){
+    if(password.length > 5 && password.length < 41){
+      return true;
+    }
+    else{
+      return false;
+    }
+  }
+  /*
+  * return true if Sign up form data is valid
+  */
+  function checkFormData(data){
+    if(checkName(data.name) && checkEmail(data.email) && checkPassword(data.password)){
+      return true;
+    }
+    else{
+      return false;
+    }
+  }
+  /*
+  * Handles form submission for Sign Up
+  * Modifies 'submit form' button to indicate form is being processed
+  */
+  function userSignUp(data){
+    // prepare loading symbol
+    let element = document.getElementById("signUpButton");
+    element.innerText = "Loading...";
+    const span = document.createElement("span");
+    span.id ="signUpLoading";
+    span.role = "status";
+    span.className="spinner-border spinner-border-sm";
+    element.appendChild(span);
+    // prepare data
+    data.state = data.state.split(" ")[0]; // eliminate abbreviation from state string, only pass name of the State
+    console.log(data);
+    if(checkFormData(data)){ // final data check
+      createEmailPassword(data);
+    }
+    else{
+      props.setView("error");
+    }
+  }
       /* 
       * Modifies log in button to indicate form is being processed
       */
@@ -202,13 +163,20 @@ function Form(props) {
         span.role = "status";
         span.className="spinner-border spinner-border-sm";
         element.appendChild(span);
-        postLoginInfo(data);
+        if(checkEmail(data.email) && checkPassword(data.password)){
+          console.log("CALLING SIGN IN");
+          console.log(data.email +" and " + data.password);
+          signIn(data);
+        }
+        else{
+          props.setView("error");
+        }
       }
     // define shared variables
     const { register, handleSubmit} = useForm();
     const inputClassName = ["form-control transparent-input text-white"];
     const selectClassName = ["form-control form-select transparent-input text-white"];
-    const linkClassName = ["btn btn-link my-link mx-auto pt-3 text-white text-nowrap"];
+    const linkClassName = ["btn btn-link my-link mx-auto pt-3 text-white"];
     const buttonClassName = ["btn myBtn text-white btn-outline-light btn-block"];
     const validationClassName = ["has-validation text-start position-relative"];
     const labelClassName1 = ["pt-1 form-label"];
@@ -239,11 +207,15 @@ function Form(props) {
       formId = "loginForm";
       submitFunction = userLogin;
       passwordError = "password";
-      passwordLength = "1";
+      passwordLength = "6";
       submit =               
-          <div id="submitDiv" className="pt-5 mx-auto d-grid">
+          <div id="submitDiv" className="pt-5 mx-auto d-grid  position-relative">
               <button id="loginButton" className={buttonClassName} type="submit">Sign In</button>
+              <div id="loginFailedAlert" className="invisible position-absolute top-100 alert alert-danger font-size-sm d-flex align-items-center justify-content-center mt-2 mx-auto py-1" role="alert">
+              <i className="bi bi-exclamation-triangle-fill pe-2"></i> Invalid Credentials. Please Try Again.
+              </div>
           </div>
+          
       links = 
         <div className="pt-5 row" align="center">
           <button type="button"  className={linkClassName} onClick={() => props.setView("signUp")}>No Account Yet? Sign Up.</button>
@@ -280,7 +252,7 @@ function Form(props) {
     var inputPassword2 = 
         <div className={validationClassName}>
           <label className={labelClassName3} id="inputPass2">Repeat Password</label>
-          <input type="password" className={inputClassName} minLength="4" maxLength="40" id="validationPassword2"
+          <input type="password" className={inputClassName} minLength="6" maxLength="40" id="validationPassword2"
             required onChange={ () => document.getElementById("validationPassword2").pattern = document.getElementById("validationPassword1").value} pattern="-1"></input>
           <Feedback error="tryAgain"/>
           <Feedback valid="passwordMatch"/>

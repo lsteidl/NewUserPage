@@ -1,5 +1,5 @@
 import React from 'react';
-
+import { signOut } from "firebase/auth";
 class HomePage extends React.Component {
     constructor(props) {
       super(props);
@@ -47,17 +47,25 @@ componentDidMount(){
   * Handles procedure for user logout
   * Switches back to login page and resets customization
   */
-  signOut(){
+  userSignOut(){
     this.handleSelection("abstract"); // reset background to default, no customization while logged out
-    this.props.setView("login");
+        signOut(this.props.auth).then(() => {
+            // Sign-out successful.
+            console.log("sign out success");
+          }).catch((error) => {
+            // An error happened.
+            console.log("sign out failed: " + error);
+          });
+    //this.props.setView("login");
   }
   render(){   
+    var backgroundButtonClass = "btn btn-outline-light mx-3";
     return(
         <div className="w-100">
             <nav className="navbar navbar-expand-lg fixed-top blur-card shadow">
                 <div className="container-fluid ">
                     <span className="navbar-brand mb-0 h1 text-white">Home</span>
-                    <button className="btn btn-outline-light" type="submit" onClick={() => this.signOut()}>Sign Out</button>
+                    <button className="btn btn-outline-light" type="submit" onClick={() => this.userSignOut()}>Sign Out</button>
                 </div>
             </nav>
             <div className="container" align="center">
@@ -65,9 +73,9 @@ componentDidMount(){
                 <div className="card mx-auto shadow bg-transparent text-white col-sm-11 col-md-8 col-lg-6 blur-card" >
                     <h3 className="card-header text-white">Choose a background image:</h3>
                         <div className="card-body">
-                            <button id="wood" className="btn btn-outline-light mx-3" type="submit" onClick={() => this.handleSelection("wood")}>Wood</button>
-                            <button id="space" className="btn btn-outline-light mx-3" type="submit" onClick={() => this.handleSelection("space")}>Space</button>
-                            <button id="abstract" className="btn btn-outline-light mx-3" type="submit" onClick={() => this.handleSelection("abstract")}>Abstract</button>
+                            <button id="wood" className={backgroundButtonClass} type="submit" onClick={() => this.handleSelection("wood")}>Wood</button>
+                            <button id="space" className={backgroundButtonClass} type="submit" onClick={() => this.handleSelection("space")}>Space</button>
+                            <button id="abstract" className={backgroundButtonClass} type="submit" onClick={() => this.handleSelection("abstract")}>Abstract</button>
                         </div>
 
                 </div>

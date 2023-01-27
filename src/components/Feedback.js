@@ -26,11 +26,12 @@ class FeedbackValid extends React.Component {
         case "password": message = "Please enter a password."; break;
         case "length": message = "Minimum Password Length: 4"; break;
         case "tryAgain": message = "Try Again!"; break;
+        case "invalidLogin": message = "Invalid Email or Password. Please Try Again."; className = "alert alert-warning"; break;
         default: message = "Try Again!"; break;
       }
     }
       return(
-        <div className={className}>
+        <div className={className} >
           {message}
         </div>
       )
