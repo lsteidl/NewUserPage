@@ -40,14 +40,25 @@
   background-size: cover;
   -o-background-size: cover;
 }
-.bg-abstract{
-  background-image: url('./images/abstract.jpg');
+.bg-1{
+  /* background-image: url('./images/abstract.jpg'); */
+  background: rgb(2,0,36);
+  background: radial-gradient(circle, rgba(2,0,36,1) 0%, rgba(9,9,121,1) 69%, rgba(0,212,255,1) 100%);
 }
-.bg-wood{
-  background-image: url('./images/wood.png');
+.bg-2{
+  /* background-image: url('./images/wood.png'); */
+   /* background: rgb(132,23,154);
+   background: linear-gradient(0deg, rgba(132,23,154,1) 0%, rgba(0,0,0,1) 100%);  */
+   /* background: rgb(132,23,154);
+   background: linear-gradient(0deg, rgba(132,23,154,1) 0%, rgba(0,0,0,1) 100%);  */
+   background: rgb(0,0,0);
+   background: linear-gradient(0deg, rgba(0,0,0,1) 5%, rgba(132,23,154,1) 100%); 
+   
 }
-.bg-space{
-  background-image: url('./images/space.jpg');
+.bg-3{
+  /* background-image: url('./images/space.jpg'); */
+  background: rgb(34,193,195);
+  background: linear-gradient(0deg, rgba(34,193,195,1) 0%, rgba(253,187,45,1) 100%); 
 }
 .page-full{
   height:'100vh';

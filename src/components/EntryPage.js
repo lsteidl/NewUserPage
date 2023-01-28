@@ -3,7 +3,7 @@ import Container from './Container.js';
 import HomePage from './HomePage';
 import FormError from './FormError';
 import Welcome from './Welcome';
-import { getAuth, onAuthStateChanged } from "firebase/auth";
+import { onAuthStateChanged } from "firebase/auth";
 
 /*
 * This is the main component returned by App.js
@@ -39,9 +39,8 @@ componentDidMount(){
     // Authentication
     this.authFirebaseListener = onAuthStateChanged(this.props.auth, (user) => {
       if (user) {
-        // User is signed in, see docs for a list of available properties
-        // https://firebase.google.com/docs/reference/js/firebase.User
-        const uid = user.uid;
+        // User is signed in
+       // const uid = user.uid;
         this.setState({signedIn: true})
         this.changeView("home");
         // ...
@@ -83,29 +82,29 @@ componentDidMount(){
   */
   changeBackground = (image) => {
     let main = document.getElementById("main");
-    if (image === "abstract"){
-      if(main.classList.contains("bg-space"))
-        main.classList.remove("bg-space");
+    if (image === "bg-1"){
+      if(main.classList.contains("bg-3"))
+        main.classList.remove("bg-3");
       else
-        main.classList.remove("bg-wood");
+        main.classList.remove("bg-2");
 
-      document.getElementById("main").classList.add("bg-abstract");
+      document.getElementById("main").classList.add("bg-1");
     }
-    else if(image === "wood"){
-      if(main.classList.contains("bg-abstract"))
-        main.classList.remove("bg-abstract");
+    else if(image === "bg-2"){
+      if(main.classList.contains("bg-1"))
+        main.classList.remove("bg-1");
       else
-        main.classList.remove("bg-space");
+        main.classList.remove("bg-3");
 
-      document.getElementById("main").classList.add("bg-wood");
+      document.getElementById("main").classList.add("bg-2");
     }
     else {
-      if(main.classList.contains("bg-wood"))
-        main.classList.remove("bg-wood");
+      if(main.classList.contains("bg-2"))
+        main.classList.remove("bg-2");
       else 
-        main.classList.remove("bg-abstract");
+        main.classList.remove("bg-1");
 
-      document.getElementById("main").classList.add("bg-space");
+      document.getElementById("main").classList.add("bg-3");
     }
   }
 
@@ -183,7 +182,7 @@ componentDidMount(){
   }
   render(){
     return(
-      <section id="main" className="min-vh-100 bg-image d-flex align-items-center page-background bg-abstract">
+      <section id="main" className="min-vh-100 bg-image d-flex align-items-center page-background bg-1">
         {this.currentView()}
       </section>
     )
@@ -239,7 +238,6 @@ function loadStates(){
       el.value = opt;
       if(select != null)
         select.add(el);
-    
   }
 }
 /*

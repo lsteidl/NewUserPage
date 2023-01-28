@@ -1,7 +1,7 @@
 import React from 'react';
 import Feedback from './Feedback';
 import { useForm } from "react-hook-form";
-import { signOut, createUserWithEmailAndPassword, signInWithEmailAndPassword } from "firebase/auth";
+import { createUserWithEmailAndPassword, signInWithEmailAndPassword } from "firebase/auth";
 
 /* 
 * Account Sign Up / Login form with validation.

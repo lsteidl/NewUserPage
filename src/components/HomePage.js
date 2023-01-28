@@ -19,28 +19,25 @@ componentDidMount(){
 * Disables the button for the current background to prevent reselection
 */
   handleSelection(buttonId){
-    this.props.setBackground(buttonId); // update background
-    let buttonWood = document.getElementById("wood");
-    let buttonSpace = document.getElementById("space");
-    let buttonAbstract = document.getElementById("abstract");
+    this.props.setBackground(buttonId); // update background in EntryPage.js
+    let bg2 = document.getElementById("bg-2");
+    let bg3 = document.getElementById("bg-3");
+    let bg1 = document.getElementById("bg-1");
     // disable/enable appropriate buttons
-    if(buttonId === "wood"){
-        console.log("wood clicked");
-        buttonWood.setAttribute("disabled","disabled"); // disable
-        buttonSpace.removeAttribute("disabled"); // enable
-        buttonAbstract.removeAttribute("disabled");
+    if(buttonId === "bg-2"){
+        bg2.setAttribute("disabled","disabled"); // disable
+        bg3.removeAttribute("disabled"); // enable
+        bg1.removeAttribute("disabled");
     }
-    else if (buttonId === "space"){
-        console.log("space clicked");
-        buttonWood.removeAttribute("disabled");
-        buttonSpace.setAttribute("disabled","disabled");
-        buttonAbstract.removeAttribute("disabled");
+    else if (buttonId === "bg-3"){
+        bg2.removeAttribute("disabled");
+        bg3.setAttribute("disabled","disabled");
+        bg1.removeAttribute("disabled");
     }
-    else if (buttonId === "abstract"){
-        console.log("abstract clicked");
-        buttonWood.removeAttribute("disabled");
-        buttonSpace.removeAttribute("disabled");
-        buttonAbstract.setAttribute("disabled","disabled");
+    else if (buttonId === "bg-1"){
+        bg2.removeAttribute("disabled");
+        bg3.removeAttribute("disabled");
+        bg1.setAttribute("disabled","disabled");
     }
   }
   /*
@@ -48,7 +45,7 @@ componentDidMount(){
   * Switches back to login page and resets customization
   */
   userSignOut(){
-    this.handleSelection("abstract"); // reset background to default, no customization while logged out
+    this.handleSelection("bg-1"); // reset background to default, no customization while logged out
         signOut(this.props.auth).then(() => {
             // Sign-out successful.
             console.log("sign out success");
@@ -73,9 +70,9 @@ componentDidMount(){
                 <div className="card mx-auto shadow bg-transparent text-white col-sm-11 col-md-8 col-lg-6 blur-card" >
                     <h3 className="card-header text-white">Choose a background image:</h3>
                         <div className="card-body">
-                            <button id="wood" className={backgroundButtonClass} type="submit" onClick={() => this.handleSelection("wood")}>Wood</button>
-                            <button id="space" className={backgroundButtonClass} type="submit" onClick={() => this.handleSelection("space")}>Space</button>
-                            <button id="abstract" className={backgroundButtonClass} type="submit" onClick={() => this.handleSelection("abstract")}>Abstract</button>
+                            <button id="bg-2" className={backgroundButtonClass} type="submit" onClick={() => this.handleSelection("bg-2")}>Purple</button>
+                            <button id="bg-3" className={backgroundButtonClass} type="submit" onClick={() => this.handleSelection("bg-3")}>Beach</button>
+                            <button id="bg-1" className={backgroundButtonClass} type="submit" onClick={() => this.handleSelection("bg-1")}>Abstract</button>
                         </div>
 
                 </div>
