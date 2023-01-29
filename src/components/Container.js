@@ -28,7 +28,6 @@ class Container extends React.Component {
       formId = "signUpForm";
     }
     else if (this.props.type === "login"){
-      console.log("login form in comp did update");
       formId = "loginForm";
     }
     const form = document.getElementById(formId);
@@ -47,7 +46,10 @@ class Container extends React.Component {
   componentDidUpdate(){
     this.prepareValidation();
   }
-
+/**
+ * 
+ * @returns Login Form or Sign Up Form
+ */
   render(){
     var cardClass = "";
     var cardBodyClass = "";

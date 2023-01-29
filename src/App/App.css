@@ -97,7 +97,23 @@ button.my-link:active, button.my-link:target, button.my-link:active:focus  {
   background-color:rgba(255, 255, 255, 0);
   transition: 0.3s;
 }
+.dropdown-menu {
+   /* background-color: transparent;  */
+   background-color:rgba(255, 255, 255, 0.481);
 
+  /* color:rgba(255, 255, 255, 0.058); */
+}
+button.my-dropdown:hover, button.my-dropdown:focus, button.my-dropdown:active:focus {
+  color:black !important;
+  background-color:rgba(255, 255, 255, 0.481);
+  transition: 0.0s;
+}
+.purple-card{
+  background-color: purple;
+}
+.transparent-backdrop{
+  background-color: rgba(0,0,0,.0001)  !important;
+}
 @keyframes App-logo-spin {
   from {
     transform: rotate(0deg);

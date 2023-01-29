@@ -1,7 +1,7 @@
 import React from 'react';
 import Feedback from './Feedback';
 import { useForm } from "react-hook-form";
-import { createUserWithEmailAndPassword, signInWithEmailAndPassword } from "firebase/auth";
+import { createUserWithEmailAndPassword, signInWithEmailAndPassword, signInAnonymously  } from "firebase/auth";
 
 /* 
 * Account Sign Up / Login form with validation.
@@ -11,7 +11,7 @@ import { createUserWithEmailAndPassword, signInWithEmailAndPassword } from "fire
 * Definitions of valid Create Account entries:
 * Name: Any String with length > 0 and < 51
 * Email: [Any String with length > 0][@][Any String with length > 0][.][Any String of letters with length > 1]. Length must be < 51.
-* Password: Any String with length > 3 and < 41, password fields must match.
+* Password: Any String with length > 5 and < 41, password fields must match.
 * State: Any of the select options.
 * Occupation: Any of the select options.
 *
@@ -37,8 +37,8 @@ function Form(props) {
         console.log(userCredential);
         let email = document.getElementById("validationEmail").value;
         let name = document.getElementById("validationName").value;
-        props.setEmail(email); // Pass email info back to SignUp to be used by Welcome
-        props.setName(name); // Pass name info back to SignUp to be used by Welcome
+        props.setEmail(email); // Pass email info back to EntryPage to be used by Welcome
+        props.setName(name); // Pass name info back to EntryPage to be used by Welcome
         props.setView("welcome") // Switch to welcome page
         // ...
       })
@@ -79,6 +79,18 @@ function Form(props) {
         // move input selection back to username
       });
       console.log("After sign in call");
+  }
+  function anonymousLogin(){
+    signInAnonymously(props.auth)
+    .then(() => {
+      // Signed in..
+    })
+    .catch((error) => {
+      const errorCode = error.code;
+      const errorMessage = error.message;
+      console.log("Anonymous Login Error: " + errorCode + ": " + errorMessage)
+      // ...
+    });
   }
   /*
   * check name validity
@@ -130,6 +142,7 @@ function Form(props) {
   /*
   * Handles form submission for Sign Up
   * Modifies 'submit form' button to indicate form is being processed
+  * Calls createEmailPassword(data) once preparation is complete
   */
   function userSignUp(data){
     // prepare loading symbol
@@ -150,28 +163,29 @@ function Form(props) {
       props.setView("error");
     }
   }
-      /* 
-      * Modifies log in button to indicate form is being processed
-      */
-      function userLogin(data){
-        //createEmailPassword(data);
-        console.log("userLogin(data)");
-        let element = document.getElementById("loginButton");
-        element.innerText = "Loading...";
-        const span = document.createElement("span");
-        span.id = "loginLoading";
-        span.role = "status";
-        span.className="spinner-border spinner-border-sm";
-        element.appendChild(span);
-        if(checkEmail(data.email) && checkPassword(data.password)){
-          console.log("CALLING SIGN IN");
-          console.log(data.email +" and " + data.password);
-          signIn(data);
-        }
-        else{
-          props.setView("error");
-        }
+    /* 
+    * Modifies log in button to indicate form is being processed
+    * calls signIn(data) once preperation is complete
+    */
+    function userLogin(data){
+      // Display loading icon
+      console.log("userLogin(data)");
+      let element = document.getElementById("loginButton");
+      element.innerText = "Loading...";
+      const span = document.createElement("span");
+      span.id = "loginLoading";
+      span.role = "status";
+      span.className="spinner-border spinner-border-sm";
+      element.appendChild(span);
+      if(checkEmail(data.email) && checkPassword(data.password)){
+        console.log("CALLING SIGN IN");
+        console.log(data.email +" and " + data.password);
+        signIn(data);
       }
+      else{
+        props.setView("error");
+      }
+    }
     // define shared variables
     const { register, handleSubmit} = useForm();
     const inputClassName = ["form-control transparent-input text-white"];
@@ -220,7 +234,7 @@ function Form(props) {
         <div className="pt-5 row" align="center">
           <button type="button"  className={linkClassName} onClick={() => props.setView("signUp")}>No Account Yet? Sign Up.</button>
           <span className="text-center"> or </span>
-          <button type="button" className={linkClassName} onClick={() => props.setView("home")}>Continue as a Guest.</button>
+          <button type="button" className={linkClassName} onClick={() => anonymousLogin()}>Continue as a Guest.</button>
         </div>   
     }
     // define each possible form element
