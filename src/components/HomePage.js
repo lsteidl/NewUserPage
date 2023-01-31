@@ -55,7 +55,7 @@ componentDidMount(){
             // An error happened.
             console.log("sign out failed: " + error);
           });
-    //this.props.setView("login");
+    this.props.setView("login");
   }
   render(){   
     var backgroundButtonClass = "btn btn-outline-light mx-3";
@@ -79,7 +79,7 @@ componentDidMount(){
                 </div>
             </nav>
             {/* <!-- Modal --> */}
-            <div className="modal fade" id="settingsModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true" data-mdb-backdrop="false">
+            <div className="modal" id="settingsModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true" data-mdb-backdrop="false">
               <div className="modal-dialog modal-lg">
                 <div className="modal-content transparent-backdrop blur-card">
                   <div className="modal-header text-white">

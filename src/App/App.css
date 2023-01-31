@@ -108,9 +108,36 @@ button.my-dropdown:hover, button.my-dropdown:focus, button.my-dropdown:active:fo
   background-color:rgba(255, 255, 255, 0.481);
   transition: 0.0s;
 }
+.game-card{
+  background-color: rgba(255, 0, 0, 0);
+  border-color: rgba(255, 255, 255, 0.698);
+  border-radius: 5px;
+  padding: 35px;
+  width: 30px;
+  height: 30px; 
+}
+.game-card:hover{
+  border-color: rgb(255, 255, 255);
+}
+.red-card{
+  background-color: red;
+}
+.orange-card{
+  background-color: orange;
+}
+.yellow-card{
+  background-color: yellow;
+}
+.green-card{
+  background-color: green;
+}
+.blue-card{
+  background-color: blue;
+}
 .purple-card{
   background-color: purple;
 }
+
 .transparent-backdrop{
   background-color: rgba(0,0,0,.0001)  !important;
 }

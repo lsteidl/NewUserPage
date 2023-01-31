@@ -1,48 +1,60 @@
 import { useState, useEffect } from 'react';
 import Square from './Square';
 //{ xIsNext, squares, onPlay 
-export default function Board() {
+export default function Board({setPoints, points}) {
+    // prepare initial card values
     var initialValues = Array.from({length: 8}, () => Math.floor(Math.random() * 6));
     initialValues.push(...initialValues);
     initialValues = shuffle(initialValues);
     const [showColors, setShowColors] = useState(Array(16).fill(0)); // which colors/cards are selected
     const [squares, setSquares] = useState(initialValues); // which color is each square
-    var [colors, setColors] = useState("hideAll");
+    var [colors, setColors] = useState("hideAll"); // track 
     const [turn1, setTurn1] = useState(null); // track choice for turn 1 
     const [turn2, setTurn2] = useState(null); // track choice for turn 2
+    const [cardsLeft, setCardsLeft] = useState(16); // track number of cards left
+    const [correctGuesses, setCorrectGuesses] = useState(0);
+    const [incorrectGuesses, setIncorrectGuesses] = useState(0);
     function resetBoard(){
+        setCardsLeft(16);
         setShowColors(Array(16).fill(0)); // tracks individual showing colors
         setSquares(initialValues); // tracks value (color) of each square
         setColors("hideAll");
         setTurn1(null);
         setTurn2(null);
+        setCorrectGuesses(0);
+        setIncorrectGuesses(0);
+        setPoints(0);
     }
     useEffect(() => {
         if(turn1 !== null && turn2 !== null){
             console.log("both turns taken, not null");
             console.log("comparing: " + squares[turn1] + " and " + squares[turn2]);
-            if(squares[turn1] === squares[turn2]){ // match found, remove squares
+            if(squares[turn1] === squares[turn2] && turn1 !== turn2){ // match found, remove squares
                 console.log("MATCH FOUND");
                 const nextSquares = squares.slice();
                 nextSquares[turn1] = -1;
                 nextSquares[turn2] = -1;
                 setTimeout(function(){ // delay to show wrong choice for 2 seconds
+                    setPoints(points + 50);
+                    setCorrectGuesses(correctGuesses + 1);
                     setSquares(nextSquares);
                     setTurn1(null);
                     setTurn2(null);
+                    setCardsLeft(cardsLeft - 2);
                 }, 500)
             }
-            else{ // flip squares back over
+            else{ // incorrect, flip squares back over
                 const nextColors = showColors.slice();
                 nextColors[turn1] = 0;
                 nextColors[turn2] = 0;
                 setTimeout(function(){ // delay to show wrong choice for 2 seconds
+                    setPoints(points - 20);
+                    setIncorrectGuesses(incorrectGuesses + 1);
                     setShowColors(nextColors);  
                     setTurn1(null);
                     setTurn2(null);
                    // setShowColors(Array(16).fill(0));
-                }, 1000);
-                
+                }, 500);
             }
             // setTurn1(null);
             // setTurn2(null);
@@ -62,7 +74,7 @@ export default function Board() {
                 console.log("turn 1 ");
                 updateTurn(1, value);
             }
-            else if (turn2 === null){
+            else if (turn2 === null && value !== turn1){
                 console.log("turn 2");
                 updateTurn(2, value);
             }
@@ -85,9 +97,11 @@ export default function Board() {
         return array;
     }
     const rowClass = "row justify-content-center";
-    const columnClass = "col-1 my-1";
+    const columnClass = "col mt-4";
     var backgroundButtonClass = "btn btn-outline-light mx-3 mt-5"; 
+    // Show the color of every card
     function showCards(){
+        //setPoints(points - 200);
         console.log("colors: " + colors)
         if(colors === "showAll"){
            setColors("hideAll");
@@ -96,67 +110,46 @@ export default function Board() {
         console.log("colors: " + colors)
         console.log("done");
     }
-    return (
-        <div className="">
-          {/* <div className="align-center"> Status</div> */}
-          <div className={rowClass}>
-            <div className={columnClass}>
-                <Square colors={colors} showColor={showColors[0]} value={squares[0]} onSquareClick={() => handleClick(0)} />    
+    // create the Game Board
+    function renderRow(row) {
+            let items = 16;
+            let columns = 4;
+            let i = row * columns;
+            return( 
+                <div className={rowClass}> 
+                    <div className={columnClass}> <Square colors={colors} showColor={showColors[i]} value={squares[i]} onSquareClick={() => handleClick(i)} /> </div>
+                    <div className={columnClass}> <Square colors={colors} showColor={showColors[i+1]} value={squares[i+1]} onSquareClick={() => handleClick(i+1)} /> </div>
+                    <div className={columnClass}> <Square colors={colors} showColor={showColors[i+2]} value={squares[i+2]} onSquareClick={() => handleClick(i+2)} /> </div>
+                    <div className={columnClass}> <Square colors={colors} showColor={showColors[i+3]} value={squares[i+3]} onSquareClick={() => handleClick(i+3)} /> </div>
+                </div> ) 
+    }
+    // Game is active
+    if(cardsLeft > 0){
+          return (
+            <div>
+               {renderRow(0)} 
+               {renderRow(1)} 
+               {renderRow(2)} 
+               {renderRow(3)} 
+                <button id="bg-2" className={backgroundButtonClass} type="button" onClick={() => showCards()}>Show Cards</button>
+                <button id="bg-2" className={backgroundButtonClass} type="button" onClick={() => resetBoard()}>Reset Board</button>
             </div>
-            <div className={columnClass}>
-                <Square colors={colors} showColor={showColors[1]} value={squares[1]} onSquareClick={() => handleClick(1)} />    
+            
+      );  
+    }
+    // Game is Complete
+    else {
+        return(
+            <div>
+                <h1 className=" py-4 font-weight-bold text-center"> Complete! </h1>
+                {/* <h2> Points: {points} </h2> */}
+                <h4> Total Guesses: {incorrectGuesses + correctGuesses} </h4>
+                <h4> Correct: {correctGuesses} </h4> 
+                {/* <h4> Incorrect: {correctGuesses} </h4>  */}
+                <button id="bg-2" className={backgroundButtonClass} type="button" onClick={() => resetBoard()}>New Game</button>
             </div>
-            <div className={columnClass}>
-                <Square colors={colors} showColor={showColors[2]} value={squares[2]} onSquareClick={() => handleClick(2)} />    
-            </div>
-            <div className={columnClass}>
-                <Square colors={colors} showColor={showColors[3]} value={squares[3]} onSquareClick={() => handleClick(3)} />    
-            </div>
-          </div>
-          <div className={rowClass}>
-            <div className={columnClass}>
-                <Square colors={colors} showColor={showColors[4]} value={squares[4]} onSquareClick={() => handleClick(4)} />    
-            </div>
-            <div className={columnClass}>
-                <Square colors={colors} showColor={showColors[5]} value={squares[5]} onSquareClick={() => handleClick(5)} />    
-            </div>
-            <div className={columnClass}>
-                <Square colors={colors} showColor={showColors[6]} value={squares[6]} onSquareClick={() => handleClick(6)} />    
-            </div>
-            <div className={columnClass}>
-                <Square colors={colors} showColor={showColors[7]} value={squares[7]} onSquareClick={() => handleClick(7)} />    
-            </div>
-          </div>
-          <div className={rowClass}>
-            <div className={columnClass}>
-                <Square colors={colors} showColor={showColors[8]} value={squares[8]} onSquareClick={() => handleClick(8)} />    
-            </div>
-            <div className={columnClass}>
-                <Square colors={colors} showColor={showColors[9]} value={squares[9]} onSquareClick={() => handleClick(9)} />    
-            </div>
-            <div className={columnClass}>
-                <Square colors={colors} showColor={showColors[10]} value={squares[10]} onSquareClick={() => handleClick(10)} />    
-            </div>
-            <div className={columnClass}>
-                <Square colors={colors} showColor={showColors[11]} value={squares[11]} onSquareClick={() => handleClick(11)} />    
-            </div>
-          </div>
-          <div className={rowClass}>
-            <div className={columnClass}>
-                <Square colors={colors} showColor={showColors[12]} value={squares[12]} onSquareClick={() => handleClick(12)} />    
-            </div>
-            <div className={columnClass}>
-                <Square colors={colors} showColor={showColors[13]} value={squares[13]} onSquareClick={() => handleClick(13)} />    
-            </div>
-            <div className={columnClass}>
-                <Square colors={colors} showColor={showColors[14]} value={squares[14]} onSquareClick={() => handleClick(14)} />    
-            </div>
-            <div className={columnClass}>
-                <Square colors={colors} showColor={showColors[15]} value={squares[15]} onSquareClick={() => handleClick(15)} />    
-            </div>
-          </div>
-          <button id="bg-2" className={backgroundButtonClass} type="button" onClick={() => showCards()}>Show Cards</button>
-          <button id="bg-2" className={backgroundButtonClass} type="button" onClick={() => resetBoard()}>Reset Board</button>
-        </div>
-      );
+        );
+    }
+
+
 }

@@ -81,16 +81,17 @@ function Form(props) {
       console.log("After sign in call");
   }
   function anonymousLogin(){
-    signInAnonymously(props.auth)
-    .then(() => {
-      // Signed in..
-    })
-    .catch((error) => {
-      const errorCode = error.code;
-      const errorMessage = error.message;
-      console.log("Anonymous Login Error: " + errorCode + ": " + errorMessage)
-      // ...
-    });
+    props.setView("home");
+    // signInAnonymously(props.auth)
+    // .then(() => {
+    //   // Signed in..
+    // })
+    // .catch((error) => {
+    //   const errorCode = error.code;
+    //   const errorMessage = error.message;
+    //   console.log("Anonymous Login Error: " + errorCode + ": " + errorMessage)
+    //   // ...
+    // });
   }
   /*
   * check name validity
@@ -204,6 +205,7 @@ function Form(props) {
     var signUpForm = false;
     var passwordLength = "";
     // define variables unique to each form type (SignUp or Login)
+    // Sign Up Form unqiue info:
     if(props.type === "signUp"){
       signUpForm = true;
       formId = "signUpForm";
@@ -216,6 +218,7 @@ function Form(props) {
           <button type="button" className={linkClassName} onClick={() => props.setView("login")}>Already Have an Account? Sign In.</button>
         </div>
     }
+    // Login Form unqiue info:
     else if(props.type === "login"){
       signUpForm = false;
       formId = "loginForm";

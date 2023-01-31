@@ -71,9 +71,9 @@ componentDidMount(){
     let signUp = document.getElementById("signUp"); // SignUp card in SignUp.js
     let signUpHeader = document.getElementById("signUpHeader"); // header in SignUp.js
     let loading = document.getElementById("formLoading"); // "loading" spinning icon
-    signUp.classList.remove("invisible");
-    signUpHeader.classList.remove("invisible");
-    loading.classList.add("invisible");
+    if(signUp !== null) signUp.classList.remove("invisible");
+    if(signUpHeader !== null) signUpHeader.classList.remove("invisible");
+    if(loading !== null) loading.classList.add("invisible");
   }
 
   /*
@@ -220,7 +220,7 @@ const getFormData = async (obj) => {
           console.log(states[i]);
         }
     }).catch(err => { console.log('Could not retrieve select options', err);
-      obj.changeView("error");
+     // obj.changeView("error");
     });
   }
 

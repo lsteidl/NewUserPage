@@ -11,7 +11,7 @@ class FormError extends React.Component {
                     <h5 className="card-header">Oops!</h5>
                         <div className="card-body">
                             <h2 className="p-2" align="center">Something went wrong.</h2>
-                            <p> An unexpected error has occurred, critical form data could not be retreived.</p>
+                            <p> An unexpected error has occurred, critical form data could not be retrieved.</p>
                             <p> Please refresh the page and try again.</p>
                             <button type="button" className="btn btn-link my-link mx-auto pt-3 text-white text-nowrap" onClick={() => window.location.reload(true)}> Refresh the page. </button>
 
