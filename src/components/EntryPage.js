@@ -209,15 +209,15 @@ const getFormData = async (obj) => {
     })
     .then((response) => response.json())
     .then((json) => {
-      console.log(json);
+      //console.log(json);
         for(let i in json.occupations) {
           occupations[i] = (json.occupations[i]);
-          console.log(occupations[i]);
+         //console.log(occupations[i]);
         }
         for(let i in json.states) {
           states[i] = (json.states[i].name);
           abbrev[i] = (json.states[i].abbreviation)
-          console.log(states[i]);
+         //console.log(states[i]);
         }
     }).catch(err => { console.log('Could not retrieve select options', err);
      // obj.changeView("error");

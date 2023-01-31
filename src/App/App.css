@@ -112,7 +112,7 @@ button.my-dropdown:hover, button.my-dropdown:focus, button.my-dropdown:active:fo
   background-color: rgba(255, 0, 0, 0);
   border-color: rgba(255, 255, 255, 0.698);
   border-radius: 5px;
-  padding: 35px;
+  padding: 28px;
   width: 30px;
   height: 30px; 
 }

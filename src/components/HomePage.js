@@ -68,7 +68,7 @@ componentDidMount(){
                     {/* <button className="btn btn-outline-light" type="submit" onClick={() => this.userSignOut()}>Sign Out</button> */}
                     <div className="btn-group">
                       <button className="btn btn-outline-light btn-lg dropdown-toggle my-dropdown pe-3" type="button" data-bs-toggle="dropdown" aria-expanded="false">
-                        <i class="bi bi-person-circle me-2"></i> <span className="pe-1"> {this.state.username} </span>
+                        <i className="bi bi-person-circle me-2"></i> <span className="pe-1"> {this.state.username} </span>
                       </button>
                       <ul className="dropdown-menu">
                         <li><button className={dropdownButtonClass} type="button" href="#">My Account</button></li>
@@ -79,7 +79,7 @@ componentDidMount(){
                 </div>
             </nav>
             {/* <!-- Modal --> */}
-            <div className="modal" id="settingsModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true" data-mdb-backdrop="false">
+            <div className="modal" id="settingsModal" tabIndex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true" data-mdb-backdrop="false">
               <div className="modal-dialog modal-lg">
                 <div className="modal-content transparent-backdrop blur-card">
                   <div className="modal-header text-white">
@@ -96,7 +96,7 @@ componentDidMount(){
                           </div>
                     </div> 
                   </div>
-                  <div class="modal-footer">
+                  <div className="modal-footer">
                     <button type="button" className={backgroundButtonClass} data-bs-dismiss="modal">Close</button>
                   </div>
                 </div>
