@@ -133,7 +133,7 @@ export default function Board({setPoints, points}) {
                {renderRow(3)} 
                 <div className='text-center'>
                         <button id="bg-2" className={backgroundButtonClass} type="button" onClick={() => showCards()}> {colors === "hideAll" ? "Show Cards": "Hide Cards"}</button>
-                        <button id="bg-2" className={backgroundButtonClass} type="button" onClick={() => resetBoard()}>Reset Board</button>
+                        <button id="bg-2" className={backgroundButtonClass} type="button" onClick={() => resetBoard()}>New Game</button>
                 </div>
             </div>
             
