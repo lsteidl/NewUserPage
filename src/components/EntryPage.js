@@ -15,7 +15,7 @@ class EntryPage extends React.Component {
     super(props);
     this.state = {
       signedIn: false,
-      currentView: "signUp",
+      currentView: "login",
       name: "DEFAULT_NAME",
       email: "DEFAULT@MAIL.COM"
     }
@@ -83,27 +83,15 @@ componentDidMount(){
   changeBackground = (image) => {
     let main = document.getElementById("main");
     if (image === "bg-1"){
-      if(main.classList.contains("bg-3"))
-        main.classList.remove("bg-3");
-      else
-        main.classList.remove("bg-2");
-
+      main.classList.contains("bg-3") ? main.classList.remove("bg-3") : main.classList.remove("bg-2");
       document.getElementById("main").classList.add("bg-1");
     }
     else if(image === "bg-2"){
-      if(main.classList.contains("bg-1"))
-        main.classList.remove("bg-1");
-      else
-        main.classList.remove("bg-3");
-
+      main.classList.contains("bg-1") ? main.classList.remove("bg-1") : main.classList.remove("bg-3");
       document.getElementById("main").classList.add("bg-2");
     }
     else {
-      if(main.classList.contains("bg-2"))
-        main.classList.remove("bg-2");
-      else 
-        main.classList.remove("bg-1");
-
+      main.classList.contains("bg-2") ? main.classList.remove("bg-2") : main.classList.remove("bg-1");
       document.getElementById("main").classList.add("bg-3");
     }
   }
@@ -198,7 +186,7 @@ const abbrev = []; // holds occupations received from server
 const getFormData = async (obj) => {
     let status = -1;
     // get option data after component has loaded
-    await fetch("https://newuserpage-a9fa8.web.app/formData")
+    await fetch("https://newuserpage-a9fa8.web.app/formData0000")
     .then(response => { 
     status = response.status;
     if (status !== 200){
@@ -220,7 +208,7 @@ const getFormData = async (obj) => {
          //console.log(states[i]);
         }
     }).catch(err => { console.log('Could not retrieve select options', err);
-     // obj.changeView("error");
+      obj.changeView("error");
     });
   }
 

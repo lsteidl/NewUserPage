@@ -143,12 +143,15 @@ export default function Board({setPoints, points}) {
     else {
         return(
             <div>
-                <h1 className=" py-4 font-weight-bold text-center"> Complete! </h1>
-                {/* <h2> Points: {points} </h2> */}
+                <h1 className="py-4 font-weight-bold text-center"> Complete! </h1>
+                
                 <h4> Total Guesses: {incorrectGuesses + correctGuesses} </h4>
                 <h4> Correct: {correctGuesses} </h4> 
                 {/* <h4> Incorrect: {correctGuesses} </h4>  */}
-                <button id="bg-2" className={backgroundButtonClass} type="button" onClick={() => resetBoard()}>New Game</button>
+                <div className="text-center">
+                  <button id="bg-2" className={backgroundButtonClass} type="button" onClick={() => resetBoard()}>New Game</button>  
+                </div>
+                
             </div>
         );
     }
